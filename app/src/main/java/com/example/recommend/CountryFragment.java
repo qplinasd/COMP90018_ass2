@@ -72,7 +72,7 @@ public class CountryFragment extends Fragment{
         }
         else{
             country = args.getString("country");
-            introduction = "This is the introduction of"+country+", which will be updated with the content from database record or network API";
+            introduction = "This is the introduction of "+country+", which will be updated with the content from database record or network API";
             selectedPosition = Integer.parseInt(args.getString("position"));
         }
 
