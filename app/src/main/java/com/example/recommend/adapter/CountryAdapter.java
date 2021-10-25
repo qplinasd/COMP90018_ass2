@@ -19,7 +19,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.bumptech.glide.signature.ObjectKey;
 
-import com.example.recommend.data.CountryData;
+import com.example.recommend.data.CityBrief;
 import com.example.recommend.R;
 
 import java.util.List;
@@ -27,10 +27,10 @@ import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryViewHolder> {
 
-    private List<CountryData> cities_list;
+    private List<CityBrief> cities_list;
     private clickCardItem clickCardItem;
 
-    public CountryAdapter(List<CountryData> cities_list, CountryAdapter.clickCardItem clickCardItem) {
+    public CountryAdapter(List<CityBrief> cities_list, CountryAdapter.clickCardItem clickCardItem) {
         this.cities_list = cities_list;
         this.clickCardItem = clickCardItem;
     }
@@ -66,8 +66,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     @Override
     public void onBindViewHolder(@NonNull CountryViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.cityName.setText(cities_list.get(position).getCityName());
-        holder.cityCountry.setText(cities_list.get(position).getCityCountry());
+        holder.cityName.setText(cities_list.get(position).getName());
+        holder.cityCountry.setText(cities_list.get(position).getCountry());
 
         String img_url = "https://source.unsplash.com/1600x900/?random";
         Glide.with(holder.cardView)

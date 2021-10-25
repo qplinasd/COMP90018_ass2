@@ -37,6 +37,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AttractionFragment extends Fragment {
 
+    private static final String APIKEY = "5ae2e3f221c38a28845f05b60618e795fe7e56472fbf4e3de4e72e30";
+    private static final String FlagURL = "https://flagcdn.com/64x48/";
+    private static final String RetrofitURL = "https://api.opentripmap.com/0.1/en/";
+
     private AttractionFragmentBinding binding;
     private TextView text_attraction_name;
     private TextView text_attraction_country;
@@ -45,8 +49,6 @@ public class AttractionFragment extends Fragment {
     private TouristAttraction attraction;
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
-
-    private static final String APIKEY = "5ae2e3f221c38a28845f05b60618e795fe7e56472fbf4e3de4e72e30";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,7 +120,7 @@ public class AttractionFragment extends Fragment {
     private void initCountryFlag(){
         // set the country flag with Glide
         String country_code = new CountryCode().getCode(attraction.getCountry()).toLowerCase(Locale.ROOT);
-        String flag_url = "https://flagcdn.com/64x48/"+country_code+".png";
+        String flag_url = FlagURL+country_code+".png";
 
         Glide.with(this)
                 .load(flag_url)
@@ -138,7 +140,7 @@ public class AttractionFragment extends Fragment {
 
         // API base url
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.opentripmap.com/0.1/en/")
+                .baseUrl(RetrofitURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

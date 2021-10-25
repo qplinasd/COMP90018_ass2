@@ -58,6 +58,9 @@ Unsplash: https://source.unsplash.com
 public class CityFragment extends Fragment{
 
     private static final String APIKEY = "5ae2e3f221c38a28845f05b60618e795fe7e56472fbf4e3de4e72e30";
+    private static final String FlagURL = "https://flagcdn.com/64x48/";
+    private static final String BackgroundURL = "https://source.unsplash.com/1600x900/?";
+    private static final String RetrofitURL = "https://api.opentripmap.com/0.1/en/";
 
     private CityFragmentBinding binding;
     private String city;
@@ -149,7 +152,7 @@ public class CityFragment extends Fragment{
 
         // set the country flag with Glide
         String country_code = new CountryCode().getCode(country).toLowerCase(Locale.ROOT);
-        String flag_url = "https://flagcdn.com/64x48/"+country_code+".png";
+        String flag_url = FlagURL+country_code+".png";
 
         Glide.with(this)
                 .load(flag_url)
@@ -169,7 +172,7 @@ public class CityFragment extends Fragment{
 
         // initial the head image with Glide
         // this API will search for a random related image of this city
-        String img_url = "https://source.unsplash.com/1600x900/?" + city;
+        String img_url = BackgroundURL + city;
         Glide.with(this)
                 .load(img_url)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -180,7 +183,7 @@ public class CityFragment extends Fragment{
 
         // API base url
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.opentripmap.com/0.1/en/")
+                .baseUrl(RetrofitURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

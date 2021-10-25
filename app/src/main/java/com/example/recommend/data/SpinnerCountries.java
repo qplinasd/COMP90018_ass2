@@ -8,20 +8,16 @@ public class SpinnerCountries {
     public static List<Countries> getCountriesList() {
         List<Countries> countryList = new ArrayList<>();
 
-        Countries Australia = new Countries();
-        Australia.setName("Australia");
+        Countries Australia = new Countries("Australia");
         countryList.add(Australia);
 
-        Countries China = new Countries();
-        China.setName("China");
+        Countries China = new Countries("China");
         countryList.add(China);
 
-        Countries United_States = new Countries();
-        United_States.setName("United States");
+        Countries United_States = new Countries("United States");
         countryList.add(United_States);
 
-        Countries Germany = new Countries();
-        Germany.setName("Germany");
+        Countries Germany = new Countries("Germany");
         countryList.add(Germany);
 
 
