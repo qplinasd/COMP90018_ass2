@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="0dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_destinations"
+        android:layout_width="260dp"
+
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="@dimen/cardview_compat_inset_shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/city_item_mask"
+            android:id="@+id/layout_country_destinations"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_destinations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/city_item_mask" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/top_recommended_destinations"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="60dp"
+                    android:text="Top Recommended"
+                    android:textColor="@color/brown"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/destination_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/roboto_mono_bold"
+                    android:text="Royal Arcade"
+                    android:textColor="@color/cream"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/top_recommended_cities" />
+
+                <TextView
+                    android:id="@+id/item_city_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:text="Melbourne, Australia"
+                    android:textColor="@color/brown"
+                    android:textSize="12dp"
+                    app:layout_constraintTop_toBottomOf="@+id/destination_name" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout >

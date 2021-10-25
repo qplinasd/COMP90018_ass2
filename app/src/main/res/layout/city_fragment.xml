@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CityFragment">
+
+    <ImageView
+        android:id="@+id/image_head_city"
+        android:layout_width="483dp"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/city_test_background" />
+
+    <ImageView
+        android:id="@+id/background1"
+        android:layout_width="439dp"
+        android:layout_height="740dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/country_background_mask" />
+
+
+    <ImageButton
+        android:id="@+id/button_return_city"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/cardview_shadow_end_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/text_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="@font/roboto_mono"
+        android:shadowColor="@color/cream"
+        android:text="Top Recommended City"
+        android:textColor="@color/text_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image_head_city" />
+
+    <TextView
+        android:id="@+id/text_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_mono_bold"
+        android:gravity="center"
+        android:shadowColor="@color/cream"
+        android:text="Bali"
+        android:textColor="@color/cream"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_topic" />
+
+    <TextView
+        android:id="@+id/text_city_country"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:drawableLeft="@drawable/city_id_flag"
+        android:drawablePadding="6dp"
+        android:fontFamily="@font/roboto_mono"
+        android:gravity="center"
+        android:text="Indonisia"
+
+        android:textColor="@color/cream"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_city" />
+
+    <TextView
+        android:id="@+id/text_explore"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginTop="220dp"
+        android:fontFamily="@font/roboto_mono"
+        android:text="Explore beautiful destination"
+        android:textColor="@color/cream"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_arrow_down"
+        android:layout_width="38dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="16dp"
+        android:src="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_explore" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_city"
+        android:layout_width="380dp"
+        android:layout_height="400dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_arrow_down"
+        android:focusable="true" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

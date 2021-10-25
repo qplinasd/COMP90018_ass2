@@ -1,0 +1,134 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CountryFragment">
+
+    <ImageView
+        android:id="@+id/image_country"
+        android:layout_width="483dp"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/country_test_background2" />
+
+    <ImageView
+        android:id="@+id/background1"
+        android:layout_width="439dp"
+        android:layout_height="740dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/country_background_mask" />
+
+
+    <Spinner
+        android:id="@+id/countries_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/spinner_background"
+        android:dropDownVerticalOffset="30dp"
+        android:popupBackground="@drawable/dropdown_background"
+        android:popupElevation="3dp"
+        android:stateListAnimator="@drawable/spinner_sla"
+        app:layout_constraintBottom_toTopOf="@+id/top_recommended"
+        app:layout_constraintEnd_toStartOf="@+id/image_country"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@+id/image_country" />
+
+    <TextView
+        android:id="@+id/country_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/roboto_mono_bold"
+        android:text="Australia"
+        android:textColor="@color/cream"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/top_recommended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_mono"
+        android:text="Top Recommended Country"
+        android:textColor="@color/brown"
+        app:layout_constraintBottom_toTopOf="@+id/country_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/introduction"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Popular Australian destinations include the coastal cities of Sydney, Brisbane and Melbourne, as well as other high-profile destinations including regional Queensland, the Gold Coast and the Great Barrier Reef, the world's largest reef. Uluru and the Australian outback are other popular locations, as is the Tasmanian wilderness. "
+        android:textAlignment="center"
+        android:textColor="@color/brown"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/country_name" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/background1"
+        >
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/gold"
+            app:tabTextColor="@color/brown">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Popular Cities" />
+
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_country"
+            android:layout_width="380dp"
+            android:layout_height="360dp"
+            android:layout_marginLeft="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tab_country"
+            />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
