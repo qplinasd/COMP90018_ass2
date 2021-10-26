@@ -36,4 +36,10 @@ public class AttractionItemFragment extends Fragment {
         text_attraction_item.setText(args.getString(ARG_ITEM));
 
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

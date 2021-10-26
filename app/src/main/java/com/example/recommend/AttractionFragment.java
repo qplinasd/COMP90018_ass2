@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
@@ -83,7 +83,10 @@ public class AttractionFragment extends Fragment {
                 args.putString("country", attraction.getCountry());
                 args.putString("position", String.valueOf(args.getString("position")));
 
-                NavHostFragment.findNavController(AttractionFragment.this).navigate(R.id.action_fragment_attraction_to_fragment_city, args);
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                CityFragment fragment = new CityFragment();
+                fragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment).commit();
             }
         });
 
@@ -173,5 +176,4 @@ public class AttractionFragment extends Fragment {
             }
         });
     }
-
 }

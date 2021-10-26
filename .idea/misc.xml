@@ -21,7 +21,38 @@
         <entry key="..\:/Recommend/app/src/main/res/layout/recommend_city.xml" value="0.23233695652173914" />
         <entry key="..\:/Recommend/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.27076923076923076" />
         <entry key="..\:/Recommend/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.27076923076923076" />
-        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/country_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/attraction_tab_indicator.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/button_bg.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/city_background_mask.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/city_item_mask.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/country_background_mask.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/ic_contact.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/ic_home.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/my_item_line.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/point_on.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/user_button.xml" value="0.275" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/font/roboto_mono.xml" value="0.2890625" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_favourite.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_guide.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_navigation.xml" value="0.1390625" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_registered.xml" value="0.264" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_splash.xml" value="0.264" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/attraction_fragment.xml" value="0.15364583333333334" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/attraction_item.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/city_fragment.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/city_recycler_item.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/content_main.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/country_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/country_recycler_cities.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_home.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_my.xml" value="0.264" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/item_my.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/pager_item_one.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/pager_item_three.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/pager_item_two.xml" value="0.2" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/menu/navigation_items.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/Sameen/Desktop/Recommend/app/src/main/res/drawable/spinner_sla.xml" value="0.275" />
         <entry key="..\:/Users/Sameen/Desktop/Recommend/app/src/main/res/layout/activity_main.xml" value="0.13722826086956522" />
         <entry key="..\:/Users/Sameen/Desktop/Recommend/app/src/main/res/layout/attraction_fragment.xml" value="0.153125" />

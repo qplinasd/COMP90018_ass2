@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -121,14 +121,17 @@ public class CountryFragment extends Fragment{
             @Override
             public void onClickItem(int position) {
 
-                // pass the parameter to AttractionFragment
+                // pass the parameter to CityFragment
                 Bundle args = new Bundle();
                 args.putString("city", cities_lists.get(position).getName());
                 args.putString("country", cities_lists.get(position).getCountry());
                 args.putString("position", String.valueOf(selectedPosition));
 
                 // navigate to AttractionFragment
-                NavHostFragment.findNavController(CountryFragment.this).navigate(R.id.action_fragment_country_to_fragment_city, args);
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                CityFragment cityFragment = new CityFragment();
+                cityFragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,cityFragment).commit();
             }
         });
 
@@ -149,7 +152,11 @@ public class CountryFragment extends Fragment{
                     Bundle args = new Bundle();
                     args.putString("country", countrySelected);
                     args.putString("position", String.valueOf(position));
-                    NavHostFragment.findNavController(CountryFragment.this).navigate(R.id.action_fragment_country_to_fragment_country, args);
+
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    CountryFragment countryFragment = new CountryFragment();
+                    countryFragment.setArguments(args);
+                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main,countryFragment).commit();
                 }
             }
 

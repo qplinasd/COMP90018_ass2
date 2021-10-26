@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backgroundblue"
+    tools:context=".MyFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/profile_card"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="30dp"
+            android:background="#00FFFFFF"
+            android:backgroundTint="#00FFFFFF"
+            app:cardCornerRadius="25dp"
+            app:contentPadding="0dp">
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:src="@drawable/profile_image_test"
+            />
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:textSize="25sp"
+            android:textColor="@color/brown"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toRightOf="@id/profile_card"
+            app:layout_constraintTop_toTopOf="@id/profile_card"
+            />
+
+        <TextView
+            android:id="@+id/profile_country"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:drawableLeft="@drawable/city_id_flag"
+            android:drawablePadding="6dp"
+            android:fontFamily="@font/roboto_mono"
+            android:gravity="center"
+            android:text="Indonisia"
+            android:typeface="sans"
+            android:layout_marginLeft="15dp"
+
+            android:textColor="@color/brown"
+            app:layout_constraintLeft_toRightOf="@id/profile_card"
+            app:layout_constraintTop_toBottomOf="@id/profile_name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/profile_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="This is the personal description of this user."
+        android:textColor="@color/brown"
+        android:textSize="15sp"
+        android:typeface="sans" />
+
+
+    <TextView
+        android:id="@+id/text_my_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Profile"
+        android:textSize="17sp"
+        android:typeface="sans"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/brown"
+        app:drawableRightCompat="@drawable/right_vector">
+
+    </TextView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/my_item_line"
+        android:layout_margin="20dp">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/text_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:textSize="17sp"
+        android:typeface="sans"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/brown"
+        app:drawableRightCompat="@drawable/right_vector">
+
+    </TextView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/my_item_line"
+        android:layout_margin="20dp">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/text_my_favourite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Favourite"
+        android:textSize="17sp"
+        android:typeface="sans"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/brown"
+        app:drawableRightCompat="@drawable/right_vector">
+
+    </TextView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/my_item_line"
+        android:layout_margin="20dp">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/text_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="17sp"
+        android:typeface="sans"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/brown"
+        app:drawableRightCompat="@drawable/right_vector">
+
+    </TextView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/my_item_line"
+        android:layout_margin="20dp">
+    </ImageView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/green"
+        app:cardCornerRadius="15dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_exit_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="log out"
+            android:textColor="@color/brown"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:backgroundTint="@color/green"/>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

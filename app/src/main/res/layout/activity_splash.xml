@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundblue"
+    >
+
+
+    <ImageView
+        android:layout_width="277dp"
+        android:layout_height="238dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="402dp"
+        android:src="@drawable/splash_text">
+
+    </ImageView>
+
+    <ImageView
+        android:layout_width="261dp"
+        android:layout_height="250dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="143dp"
+        android:src="@drawable/splash_icon">
+
+    </ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="20dp"
+        android:text="UNIMELB"
+        android:textAlignment="center"
+        android:textColor="@color/brown"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="sans">
+
+    </TextView>
+
+</RelativeLayout>

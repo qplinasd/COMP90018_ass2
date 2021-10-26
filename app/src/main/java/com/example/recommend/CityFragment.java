@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -109,7 +109,11 @@ public class CityFragment extends Fragment{
                 Bundle args = new Bundle();
                 args.putString("country", country);
                 args.putString("position", String.valueOf(selectedPosition));
-                NavHostFragment.findNavController(CityFragment.this).navigate(R.id.action_fragment_city_to_fragment_country, args);
+
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                CountryFragment countryFragment = new CountryFragment();
+                countryFragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,countryFragment).commit();
             }
 
 
@@ -141,7 +145,10 @@ public class CityFragment extends Fragment{
                 args.putString("position", String.valueOf(selectedPosition));
 
                 // navigate to AttractionFragment
-                NavHostFragment.findNavController(CityFragment.this).navigate(R.id.action_fragment_city_to_fragment_attraction, args);
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                AttractionFragment fragment = new AttractionFragment();
+                fragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,fragment).commit();
             }
         });
 
