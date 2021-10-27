@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -24,6 +25,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.recommend.data.User;
 import com.example.recommend.databinding.CountryFragmentBinding;
 import com.example.recommend.databinding.FragmentMyBinding;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +37,7 @@ import org.w3c.dom.Text;
 /**
  * Created by Haoran Lin on 2021/10/26.
  */
-public class MyFragment extends Fragment implements ValueEventListener {
+public class MyFragment extends Fragment implements ChildEventListener {
 
     private FragmentMyBinding binding;
 
@@ -47,6 +49,8 @@ public class MyFragment extends Fragment implements ValueEventListener {
     private TextView profileGender;
     private TextView profileDesc;
     private Button btnExit;
+
+    private TextView text_my_profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +65,8 @@ public class MyFragment extends Fragment implements ValueEventListener {
         profileImg = binding.profileImage;
         profileDesc = binding.profileDescription;
         btnExit = binding.btnExitUser;
+
+        text_my_profile = binding.textMyProfile;
 
         return binding.getRoot();
 
@@ -86,39 +92,9 @@ public class MyFragment extends Fragment implements ValueEventListener {
                 .getInstance(FirebaseURL)
                 .getReference("users");
 
-        databaseReference.addValueEventListener(this);
+        databaseReference.orderByChild("username").equalTo(username).addChildEventListener(this);
     }
 
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-            User user = dataSnapshot.getValue(User.class);
-
-            if(user.getUsername().equals(username)){
-
-                profileName.setText(user.getUsername());
-                profileDesc.setText(user.getDescription());
-                profileGender.setText(user.getGender());
-
-                if (user.getGender().equalsIgnoreCase("female")){
-                    showGenderImg("icon_female");
-                }
-                if (user.getGender().equalsIgnoreCase("non-binary")){
-                    showGenderImg("icon_non_binary");
-                }
-                if (user.getGender().equalsIgnoreCase("male")){
-                    showGenderImg("icon_male");
-                }
-
-                break;
-            }
-        }
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
-
-    }
 
     public void showGenderImg(String imgName){
 
@@ -135,6 +111,61 @@ public class MyFragment extends Fragment implements ValueEventListener {
                         profileGender.setCompoundDrawablesWithIntrinsicBounds(placeholder, null, null, null);
                     }
                 });
+
+    }
+
+    @Override
+    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+        User user = snapshot.getValue(User.class);
+
+        profileName.setText(user.getUsername());
+        profileDesc.setText(user.getDescription());
+        profileGender.setText(user.getGender());
+
+        if (user.getGender().equalsIgnoreCase("female")){
+            showGenderImg("icon_female");
+        }
+        if (user.getGender().equalsIgnoreCase("non-binary")){
+            showGenderImg("icon_non_binary");
+        }
+        if (user.getGender().equalsIgnoreCase("male")){
+            showGenderImg("icon_male");
+        }
+
+        text_my_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("username", user.getUsername());
+                args.putString("email", user.getEmail());
+                args.putString("gender", user.getGender());
+                args.putString("description", user.getDescription());
+
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                ProfileFragment profileFragment  = new ProfileFragment();
+                profileFragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,profileFragment).commit();
+            }
+        });
+    }
+
+    @Override
+    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+    }
+
+    @Override
+    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+    }
+
+    @Override
+    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
 
     }
 }
