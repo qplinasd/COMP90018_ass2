@@ -201,7 +201,6 @@ public class CountryFragment extends Fragment{
                 List<CityBrief> cities_list = new ArrayList<>();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     CityBrief cityBrief = dataSnapshot.getValue(CityBrief.class);
-                    Log.d("TAG", "onDataChange: "+cityBrief.getName());
                     cities_list.add(cityBrief);
                 }
 

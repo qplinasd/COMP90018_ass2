@@ -54,41 +54,28 @@
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:hint="User ID"
+        android:hint="Username"
+        android:theme="@style/MyEditText"
+        android:textColor="@color/brown"
         android:textColorHint="@color/brown"
-        android:textCursorDrawable="NULL"
-        android:background="NULL"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
         android:autofillHints="name"
         android:inputType="text"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/my_item_line">
-    </ImageView>
 
     <EditText
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:textCursorDrawable="NULL"
-        android:background="NULL"
+        android:theme="@style/MyEditText"
         android:inputType="textPassword"
+        android:textColor="@color/brown"
         android:textColorHint="@color/brown"
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:hint="Password"/>
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/my_item_line">
-    </ImageView>
 
 
     <Button
@@ -118,15 +105,15 @@
         app:layout_constraintBottom_toTopOf="@id/btn_registered">
 
     </TextView>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_registered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="NULL"
         android:text="register here"
+        android:background="#00162929"
         android:textSize="14sp"
         android:textColor="@color/gold"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 

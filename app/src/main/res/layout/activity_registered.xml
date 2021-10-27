@@ -32,7 +32,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="60dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,10 +48,20 @@
         android:id="@+id/et_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:hint="*Username"
         android:theme="@style/MyEditText"
         android:textColor="@color/brown"
         android:textColorHint="@color/brown"/>
+
+        <TextView
+            android:id="@+id/text_wrong_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username can not be null"
+            android:textColor="@color/red"
+            android:layout_marginLeft="5dp"
+            android:visibility="invisible">
+        </TextView>
 
     <RadioGroup
         android:id="@+id/mRadioGroup"
@@ -86,34 +96,58 @@
 
     </RadioGroup>
 
-    <EditText
-        android:id="@+id/et_pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:theme="@style/MyEditText"
-        android:textColor="@color/brown"
-        android:textColorHint="@color/brown"/>
+        <EditText
+            android:id="@+id/et_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="*Password"
+            android:inputType="textPassword"
+            android:textColor="@color/brown"
+            android:textColorHint="@color/brown"
+            android:theme="@style/MyEditText"
+            />
+
+        <TextView
+            android:id="@+id/text_wrong_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password can not be null"
+            android:textColor="@color/red"
+            android:layout_marginLeft="5dp"
+            android:visibility="invisible">
+        </TextView>
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input password again"
+        android:hint="*Confirm password"
+        android:inputType="textPassword"
         android:theme="@style/MyEditText"
         android:textColor="@color/brown"
         android:textColorHint="@color/brown"
         android:layout_marginTop="10dp"/>
 
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:theme="@style/MyEditText"
-        android:textColor="@color/brown"
-        android:textColorHint="@color/brown"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/text_inconsistent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Passwords inconsistent"
+            android:textColor="@color/red"
+            android:layout_marginLeft="5dp"
+            android:visibility="invisible">
+        </TextView>
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/brown"
+            android:textColorHint="@color/brown"
+            android:theme="@style/MyEditText"
+            android:layout_marginBottom="15dp"/>
 
         <EditText
             android:id="@+id/et_desc"
@@ -129,7 +163,7 @@
         android:id="@+id/btnRegistered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/button_bg"
         android:text="@string/text_registered"
         android:textColor="@color/backgroundblue"/>
@@ -151,11 +185,11 @@
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="NULL"
+        android:background="#00162929"
         android:text="login here"
         android:textSize="14sp"
         android:textColor="@color/gold"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 

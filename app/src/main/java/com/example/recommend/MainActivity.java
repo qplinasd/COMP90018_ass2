@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         initView();
         initData();
 
@@ -51,15 +50,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Intent intent = getIntent();
+        Bundle args = new Bundle();
+        args.putString("username", intent.getStringExtra("username"));
         switch (item.getItemId()){
             case R.id.action_home:
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, new HomeFragment()).commit();
+                HomeFragment homeFragment = new HomeFragment();
+                homeFragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment).commit();
                 return true;
             case R.id.action_share:
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,new CountryFragment()).commit();
+                CountryFragment countryFragment = new CountryFragment();
+                countryFragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,countryFragment).commit();
                 return true;
             case R.id.action_my:
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,new MyFragment()).commit();
+                MyFragment myFragment = new MyFragment();
+                myFragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,myFragment).commit();
                 return true;
 
         }

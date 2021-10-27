@@ -47,7 +47,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/green"
-        android:text="travel begin"
+        android:text="Sign up"
         android:textColor="@color/brown"
         app:layout_constraintEnd_toEndOf="parent" />
 
