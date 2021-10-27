@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recommend.data.CityBrief;
 import com.example.recommend.data.User;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ChildEventListener {
 
     private static final String FirebaseURL = "https://comp90018-a2-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
@@ -109,40 +111,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .getInstance(FirebaseURL)
                         .getReference("users");
 
-                databaseReference.addValueEventListener(this);
+                databaseReference.orderByChild("username").equalTo(name).addChildEventListener(this);
 
         }
     }
 
     @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-            User user = dataSnapshot.getValue(User.class);
+    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            if(user.getUsername().equals(name)){
-                databasePassword = user.getPassword();
+        if (snapshot.exists()){
+            User user = snapshot.getValue(User.class);
 
-                if(databasePassword.equals("")){
-                    new AlertDialog.Builder(this)
-                            .setMessage("User does not exist")
-                            .setPositiveButton("confirm", null)
-                            .show();
-                }
-                else if(!databasePassword.equals(password)){
-                    new AlertDialog.Builder(this)
-                            .setMessage("Wrong password")
-                            .setPositiveButton("confirm", null)
-                            .show();
-                }
-                else{
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra("username", name);
-                    startActivity(intent);
-                }
+            databasePassword = user.getPassword();
 
-                break;
+            if (databasePassword.equals("")) {
+                new AlertDialog.Builder(this)
+                        .setMessage("User does not exist")
+                        .setPositiveButton("confirm", null)
+                        .show();
+            } else if (!databasePassword.equals(password)) {
+                new AlertDialog.Builder(this)
+                        .setMessage("Wrong password")
+                        .setPositiveButton("confirm", null)
+                        .show();
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("username", name);
+                startActivity(intent);
             }
         }
+
+    }
+
+    @Override
+    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+    }
+
+    @Override
+    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+    }
+
+    @Override
+    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
     }
 
     @Override
