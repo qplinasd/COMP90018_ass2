@@ -1,20 +1,17 @@
-package com.example.recommend;
+package com.example.recommend.adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.recommend.R;
 import com.example.recommend.data.User;
-import com.example.recommend.placeholder.PlaceholderContent.PlaceholderItem;
-import com.example.recommend.databinding.FragmentProfileBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<ProfileItemRecyclerViewAdapter.ViewHolder> {
 

@@ -1,10 +1,13 @@
 package com.example.recommend;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+
 /**
  * Created by Haoran Lin on 2021/10/26.
  */
@@ -49,8 +54,15 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private TextView profileGender;
     private TextView profileDesc;
     private Button btnExit;
-
+    private CustomDialog dialog;
     private TextView text_my_profile;
+    private Button btn_camera;
+    private Button btn_album;
+    private Button btn_cancel;
+    public static final String PHOTO_IMAGE_FILE_NAME = "fileImg.jpg";
+    public static final int IMAGE_REQUEST_CODE = 101;
+    public static final int RESULT_REQUEST_CODE = 102;
+    private File tempFile = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +77,12 @@ public class MyFragment extends Fragment implements ChildEventListener {
         profileImg = binding.profileImage;
         profileDesc = binding.profileDescription;
         btnExit = binding.btnExitUser;
-
+        dialog = new CustomDialog(getActivity(), 0, 0,
+                R.layout.dialog_photo, R.style.pop_anim_style, Gravity.BOTTOM, 0);
+        dialog.setCancelable(false);
+        btn_camera = (Button) dialog.findViewById(R.id.btn_camera);
+        btn_album = (Button) dialog.findViewById(R.id.btn_album);
+        btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
         text_my_profile = binding.textMyProfile;
 
         return binding.getRoot();
@@ -84,6 +101,31 @@ public class MyFragment extends Fragment implements ChildEventListener {
         });
 
         getUserInfo();
+
+        profileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+            }
+        });
+
+        btn_album.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, IMAGE_REQUEST_CODE);
+                dialog.dismiss();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
     public void getUserInfo(){
@@ -147,6 +189,60 @@ public class MyFragment extends Fragment implements ChildEventListener {
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main,profileFragment).commit();
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != getActivity().RESULT_CANCELED) {
+            switch (requestCode) {
+                //alnum
+                case IMAGE_REQUEST_CODE:
+                    startPhotoZoom(data.getData());
+                    break;
+
+                case RESULT_REQUEST_CODE:
+
+                    if (data != null) {
+
+                        setImageToView(data);
+
+                        if (tempFile != null) {
+                            tempFile.delete();
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+    //裁剪
+    private void startPhotoZoom(Uri uri) {
+        if (uri == null) {
+
+            return;
+        }
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        //set cut
+        intent.putExtra("crop", "true");
+
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        //quality
+        intent.putExtra("outputX", 320);
+        intent.putExtra("outputY", 320);
+
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, RESULT_REQUEST_CODE);
+    }
+
+    //设置图片
+    private void setImageToView(Intent data) {
+        Bundle bundle = data.getExtras();
+        if (bundle != null) {
+            Bitmap bitmap = bundle.getParcelable("data");
+            profileImg.setImageBitmap(bitmap);
+        }
     }
 
     @Override
