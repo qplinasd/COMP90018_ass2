@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.btn_registered:
                 startActivity(new Intent(this, RegisteredActivity.class));
-                break;
+
             case R.id.btnLogin:
 
                 DatabaseReference databaseReference = FirebaseDatabase
@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .getReference("users");
 
                 databaseReference.orderByChild("username").equalTo(name).addChildEventListener(this);
-
+                break;
         }
     }
 
