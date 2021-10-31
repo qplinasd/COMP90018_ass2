@@ -67,6 +67,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private SwitchCompat switch_shake_undo;
     private CustomDialog dialog_settings;
     private AppCompatButton btn_setting_back;
+    private MyApplication app;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -165,10 +166,11 @@ public class MyFragment extends Fragment implements ChildEventListener {
         switch_shake_undo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                app = (MyApplication) getActivity().getApplication();
                 if(isChecked){
-
+                    app.setShakeUndoOn(true);
                 }else{
-
+                    app.setShakeUndoOn(false);
                 }
             }
         });
