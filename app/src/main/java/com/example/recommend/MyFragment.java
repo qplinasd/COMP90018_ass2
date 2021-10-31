@@ -13,33 +13,36 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.signature.ObjectKey;
+import com.example.recommend.application.MyApplication;
 import com.example.recommend.data.User;
 import com.example.recommend.databinding.FragmentMyBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-/**
- * Created by Haoran Lin on 2021/10/26.
- */
 public class MyFragment extends Fragment implements ChildEventListener {
 
     private FragmentMyBinding binding;
@@ -57,10 +60,11 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private AppCompatButton btn_camera;
     private AppCompatButton btn_album;
     private AppCompatButton btn_cancel;
-    public static final String PHOTO_IMAGE_FILE_NAME = "fileImg.jpg";
     public static final int IMAGE_REQUEST_CODE = 101;
     public static final int RESULT_REQUEST_CODE = 102;
+    private static final int CAMERA_REQUEST = 103;
     private File tempFile = null;
+    private FirebaseStorage storage;
 
     private TextView text_settings;
     private TextView text_password_update;
@@ -89,6 +93,8 @@ public class MyFragment extends Fragment implements ChildEventListener {
         btn_album = dialog.findViewById(R.id.btn_album);
         btn_cancel = dialog.findViewById(R.id.btn_cancel);
         text_my_profile = binding.textMyProfile;
+
+        storage = FirebaseStorage.getInstance();
 
         text_settings = binding.textSettings;
         dialog_settings = new CustomDialog(getActivity(), 0, 0, R.layout.dialog_settings,
@@ -119,6 +125,15 @@ public class MyFragment extends Fragment implements ChildEventListener {
             @Override
             public void onClick(View v) {
                 dialog.show();
+            }
+        });
+
+        btn_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                dialog.dismiss();
             }
         });
 
@@ -167,11 +182,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 app = (MyApplication) getActivity().getApplication();
-                if(isChecked){
-                    app.setShakeUndoOn(true);
-                }else{
-                    app.setShakeUndoOn(false);
-                }
+                app.setShakeUndoOn(isChecked);
             }
         });
 
@@ -191,6 +202,15 @@ public class MyFragment extends Fragment implements ChildEventListener {
                 .getReference("users");
 
         databaseReference.orderByChild("username").equalTo(username).addChildEventListener(this);
+
+        // get profile image
+        StorageReference storageRef = storage.getReference().child("profileImages/"+username+".jpg");
+        GlideApp.with(this)
+                .load(storageRef)
+                .signature(new ObjectKey(System.currentTimeMillis()))
+                .error(getResources().getDrawable(R.drawable.profile_image_test))
+                .into(profileImg);
+
     }
 
 
@@ -251,9 +271,12 @@ public class MyFragment extends Fragment implements ChildEventListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != getActivity().RESULT_CANCELED) {
             switch (requestCode) {
-                //alnum
+                //album
                 case IMAGE_REQUEST_CODE:
+                //camera
+                case CAMERA_REQUEST:
                     startPhotoZoom(data.getData());
+                    setImageToView(data);
                     break;
 
                 case RESULT_REQUEST_CODE:
@@ -267,6 +290,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
                         }
                     }
                     break;
+
             }
         }
     }
@@ -285,19 +309,44 @@ public class MyFragment extends Fragment implements ChildEventListener {
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         //quality
-        intent.putExtra("outputX", 320);
-        intent.putExtra("outputY", 320);
+        intent.putExtra("outputX", 210);
+        intent.putExtra("outputY", 210);
+        intent.putExtra("scale", true);
 
         intent.putExtra("return-data", true);
         startActivityForResult(intent, RESULT_REQUEST_CODE);
     }
 
-    //设置图片
+    //set the image to profile image
     private void setImageToView(Intent data) {
         Bundle bundle = data.getExtras();
         if (bundle != null) {
             Bitmap bitmap = bundle.getParcelable("data");
+
+            StorageReference storageRef = storage.getReference().child("profileImages/"+username+".jpg");
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             profileImg.setImageBitmap(bitmap);
+            byte[] imgData = baos.toByteArray();
+
+            // update profile image
+            UploadTask uploadTask = storageRef.putBytes(imgData);
+
+            // Register observers to listen for when the download is done or if it fails
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                    Log.d("TAG", "onFailure: Upload fails");
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                    Log.d("TAG", "onFailure: Upload successfully");
+                }
+            });
         }
     }
 

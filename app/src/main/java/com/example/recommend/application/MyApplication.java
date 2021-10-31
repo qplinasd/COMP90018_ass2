@@ -1,4 +1,4 @@
-package com.example.recommend;
+package com.example.recommend.application;
 
 import android.app.Application;
 

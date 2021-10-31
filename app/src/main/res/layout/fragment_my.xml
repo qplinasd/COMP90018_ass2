@@ -30,6 +30,7 @@
             android:layout_height="match_parent"
             android:background="#00FFFFFF"
             android:src="@drawable/profile_image_test"
+            android:scaleType="centerCrop"
             />
         </androidx.cardview.widget.CardView>
         <TextView
