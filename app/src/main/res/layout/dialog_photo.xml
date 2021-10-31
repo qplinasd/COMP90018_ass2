@@ -7,15 +7,15 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_camera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
         android:text="camera"
-        android:textColor="@android:color/white"/>
+        android:textColor="@color/backgroundblue"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_album"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,15 +23,15 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/button_bg"
         android:text="album"
-        android:textColor="@android:color/white"/>
+        android:textColor="@color/backgroundblue"/>
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
         android:text="cancel"
-        android:textColor="@android:color/white"/>
+        android:textColor="@color/backgroundblue"/>
 
 </LinearLayout>

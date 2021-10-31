@@ -64,7 +64,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                 // add more images
             case R.id.button_post:
                 // submit the post
-                break;
         }
     }
 }

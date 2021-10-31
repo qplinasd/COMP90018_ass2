@@ -5,20 +5,22 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,16 +28,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.recommend.data.User;
-import com.example.recommend.databinding.CountryFragmentBinding;
 import com.example.recommend.databinding.FragmentMyBinding;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -56,13 +54,19 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private Button btnExit;
     private CustomDialog dialog;
     private TextView text_my_profile;
-    private Button btn_camera;
-    private Button btn_album;
-    private Button btn_cancel;
+    private AppCompatButton btn_camera;
+    private AppCompatButton btn_album;
+    private AppCompatButton btn_cancel;
     public static final String PHOTO_IMAGE_FILE_NAME = "fileImg.jpg";
     public static final int IMAGE_REQUEST_CODE = 101;
     public static final int RESULT_REQUEST_CODE = 102;
     private File tempFile = null;
+
+    private TextView text_settings;
+    private TextView text_password_update;
+    private SwitchCompat switch_shake_undo;
+    private CustomDialog dialog_settings;
+    private AppCompatButton btn_setting_back;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,10 +84,18 @@ public class MyFragment extends Fragment implements ChildEventListener {
         dialog = new CustomDialog(getActivity(), 0, 0,
                 R.layout.dialog_photo, R.style.pop_anim_style, Gravity.BOTTOM, 0);
         dialog.setCancelable(false);
-        btn_camera = (Button) dialog.findViewById(R.id.btn_camera);
-        btn_album = (Button) dialog.findViewById(R.id.btn_album);
-        btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+        btn_camera = dialog.findViewById(R.id.btn_camera);
+        btn_album = dialog.findViewById(R.id.btn_album);
+        btn_cancel = dialog.findViewById(R.id.btn_cancel);
         text_my_profile = binding.textMyProfile;
+
+        text_settings = binding.textSettings;
+        dialog_settings = new CustomDialog(getActivity(), 0, 0, R.layout.dialog_settings,
+                R.style.pop_anim_style, Gravity.BOTTOM, 0);
+        dialog_settings.setCancelable(false);
+        text_password_update = dialog_settings.findViewById(R.id.text_password_update);
+        switch_shake_undo = dialog_settings.findViewById(R.id.switch_shake_undo);
+        btn_setting_back = dialog_settings.findViewById(R.id.btn_setting_back);
 
         return binding.getRoot();
 
@@ -123,6 +135,48 @@ public class MyFragment extends Fragment implements ChildEventListener {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+
+        text_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_settings.show();
+            }
+        });
+
+        text_password_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog_settings.dismiss();
+                Bundle args = new Bundle();
+                args.putString("username", username);
+
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                PasswordFragment passwordFragment  = new PasswordFragment();
+                passwordFragment.setArguments(args);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,passwordFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        switch_shake_undo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+
+                }else{
+
+                }
+            }
+        });
+
+        btn_setting_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_settings.dismiss();
             }
         });
 
