@@ -137,8 +137,8 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
         post_title = "";
         post_content = "";
-        //TODO: get username from home page
-        username = "test";
+        app = (MyApplication) getActivity().getApplication();
+        username = app.getUsername();
         key = "";
         imageUriList = new ArrayList<>();
         imageList = new ArrayList<>();
@@ -158,7 +158,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         layout_location.setOnClickListener(this);
 
         // get current location
-        app = (MyApplication) getActivity().getApplication();
         if(app.getCurrentLocation() != null){
             text_current_location.setText(app.getCurrentLocation().getSubAdminArea() + ", " +
                     app.getCurrentLocation().getCountryName());
@@ -223,9 +222,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_return_home:
                 // return to previous page
-                //TODO: change to pop stack when return
-                HomeFragment homeFragment  = new HomeFragment();
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,homeFragment).commit();
+                startActivity(new Intent(getContext(), MainActivity.class));
                 break;
             case R.id.button_post:
                 // submit the post
@@ -285,10 +282,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                             .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //TODO: pass username
-//                                    Intent intent = new Intent(getContext(), MainActivity.class);
-//                                    intent.putExtra("username", username);
-//                                    startActivity(intent);
                                     startActivity(new Intent(getContext(), MainActivity.class));
                                 }
                             })

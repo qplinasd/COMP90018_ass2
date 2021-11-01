@@ -104,12 +104,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Bundle args = new Bundle();
-        args.putString("username", user.getUsername());
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        MyFragment myFragment  = new MyFragment();
-        myFragment.setArguments(args);
-        fragmentTransaction.replace(R.id.nav_host_fragment_content_main,myFragment).commit();
+        getActivity().getSupportFragmentManager().popBackStack();
 
     }
 

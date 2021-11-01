@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recommend.application.MyApplication;
 import com.example.recommend.data.CityBrief;
 import com.example.recommend.data.User;
 import com.google.firebase.database.ChildEventListener;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String name;
     private String password;
     private String databasePassword;
+    private MyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +137,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .setPositiveButton("confirm", null)
                         .show();
             } else {
+                app = (MyApplication) getApplication();
+                app.setUsername(name);
+
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("username", name);
                 startActivity(intent);

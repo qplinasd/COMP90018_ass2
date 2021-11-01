@@ -84,8 +84,8 @@ public class MyFragment extends Fragment implements ChildEventListener {
 
         binding = FragmentMyBinding.inflate(inflater, container, false);
 
-        Bundle args = getArguments();
-        username = args.getString("username");
+        app = (MyApplication) getActivity().getApplication();
+        username = app.getUsername();
 
         profileName = binding.profileName;
         profileGender = binding.profileGender;
@@ -121,6 +121,8 @@ public class MyFragment extends Fragment implements ChildEventListener {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app = (MyApplication) getActivity().getApplication();
+                app.setUsername("");
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
@@ -271,7 +273,9 @@ public class MyFragment extends Fragment implements ChildEventListener {
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 ProfileFragment profileFragment  = new ProfileFragment();
                 profileFragment.setArguments(args);
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,profileFragment).commit();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main,profileFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

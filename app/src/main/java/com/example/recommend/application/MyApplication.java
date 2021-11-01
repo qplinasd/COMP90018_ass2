@@ -6,12 +6,14 @@ import android.location.Address;
 public class MyApplication extends Application {
     private Boolean IsShakeUndoOn;
     private Address currentLocation;
+    private String username;
 
     @Override
     public void onCreate() {
         super.onCreate();
         setShakeUndoOn(false);
         currentLocation = null;
+        username = "";
     }
     public Boolean getShakeUndoOn() {
         return IsShakeUndoOn;
@@ -27,5 +29,13 @@ public class MyApplication extends Application {
 
     public void setCurrentLocation(Address currentLocation) {
         this.currentLocation = currentLocation;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

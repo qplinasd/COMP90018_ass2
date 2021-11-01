@@ -51,22 +51,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Intent intent = getIntent();
-        Bundle args = new Bundle();
-        args.putString("username", intent.getStringExtra("username"));
         switch (item.getItemId()){
             case R.id.action_home:
                 HomeFragment homeFragment = new HomeFragment();
-                homeFragment.setArguments(args);
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment).commit();
                 return true;
             case R.id.action_share:
                 CountryFragment countryFragment = new CountryFragment();
-                countryFragment.setArguments(args);
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main,countryFragment).commit();
                 return true;
             case R.id.action_my:
                 MyFragment myFragment = new MyFragment();
-                myFragment.setArguments(args);
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main,myFragment).commit();
                 return true;
 
