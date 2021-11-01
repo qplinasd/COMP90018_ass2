@@ -75,7 +75,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initView() {
         String imgURL = "";
-        //ImageView img = (ImageView) findViewById(R.id.set_img);
+        ImageView img = (ImageView) findViewById(R.id.set_img);
+        img.setImageResource(R.drawable.city_test_background);
         //Bitmap bitmap = getLocalBitmap("../../../../../res/drawable/country_test_background2.jpeg");
         //img.setImageBitmap(bitmap);
 
