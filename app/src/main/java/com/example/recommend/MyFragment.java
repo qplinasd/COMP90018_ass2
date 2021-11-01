@@ -66,8 +66,8 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private AppCompatButton btn_camera;
     private AppCompatButton btn_album;
     private AppCompatButton btn_cancel;
-    public static final int IMAGE_REQUEST_CODE = 101;
-    public static final int RESULT_REQUEST_CODE = 102;
+    private static final int IMAGE_REQUEST_CODE = 101;
+    private static final int RESULT_REQUEST_CODE = 102;
     private static final int CAMERA_REQUEST_CODE = 103;
     private File tempFile = null;
     private FirebaseStorage storage;
@@ -78,14 +78,6 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private CustomDialog dialog_settings;
     private AppCompatButton btn_setting_back;
     private MyApplication app;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -309,7 +301,6 @@ public class MyFragment extends Fragment implements ChildEventListener {
 
                 case RESULT_REQUEST_CODE:
 
-                    Log.d("TAG", "RESULT_REQUEST_CODE: "+data);
                     if (data != null) {
 
                         try {
@@ -354,7 +345,6 @@ public class MyFragment extends Fragment implements ChildEventListener {
     //set the image to profile image
     private void setImageToView(Intent data) throws IOException {
         Bundle bundle = data.getExtras();
-        Log.d("TAG", "setImageToView: "+bundle);
         Bitmap bitmap;
         if(bundle != null){
             bitmap = bundle.getParcelable("data");
