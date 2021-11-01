@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +46,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 public class MyFragment extends Fragment implements ChildEventListener {
 
@@ -62,7 +68,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private AppCompatButton btn_cancel;
     public static final int IMAGE_REQUEST_CODE = 101;
     public static final int RESULT_REQUEST_CODE = 102;
-    private static final int CAMERA_REQUEST = 103;
+    private static final int CAMERA_REQUEST_CODE = 103;
     private File tempFile = null;
     private FirebaseStorage storage;
 
@@ -72,6 +78,14 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private CustomDialog dialog_settings;
     private AppCompatButton btn_setting_back;
     private MyApplication app;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,8 +146,10 @@ public class MyFragment extends Fragment implements ChildEventListener {
             @Override
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
                 dialog.dismiss();
+
+//                ImagePicker.Builder imagePicker = new ImagePicker.Builder(getActivity());
             }
         });
 
@@ -143,6 +159,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, IMAGE_REQUEST_CODE);
+//                new ImagePicker.Builder(getActivity()).galleryOnly().cropSquare().start();
                 dialog.dismiss();
             }
         });
@@ -269,21 +286,37 @@ public class MyFragment extends Fragment implements ChildEventListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != getActivity().RESULT_CANCELED) {
             switch (requestCode) {
                 //album
                 case IMAGE_REQUEST_CODE:
+                    try {
+                        setImageToView(data);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 //camera
-                case CAMERA_REQUEST:
+                case CAMERA_REQUEST_CODE:
                     startPhotoZoom(data.getData());
-                    setImageToView(data);
+                    try {
+                        setImageToView(data);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case RESULT_REQUEST_CODE:
 
+                    Log.d("TAG", "RESULT_REQUEST_CODE: "+data);
                     if (data != null) {
 
-                        setImageToView(data);
+                        try {
+                            setImageToView(data);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                         if (tempFile != null) {
                             tempFile.delete();
@@ -295,7 +328,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
         }
     }
 
-    //裁剪
+    //crop
     private void startPhotoZoom(Uri uri) {
         if (uri == null) {
 
@@ -314,40 +347,44 @@ public class MyFragment extends Fragment implements ChildEventListener {
         intent.putExtra("scale", true);
 
         intent.putExtra("return-data", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         startActivityForResult(intent, RESULT_REQUEST_CODE);
     }
 
     //set the image to profile image
-    private void setImageToView(Intent data) {
+    private void setImageToView(Intent data) throws IOException {
         Bundle bundle = data.getExtras();
-        if (bundle != null) {
-            Bitmap bitmap = bundle.getParcelable("data");
-
-            StorageReference storageRef = storage.getReference().child("profileImages/"+username+".jpg");
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            profileImg.setImageBitmap(bitmap);
-            byte[] imgData = baos.toByteArray();
-
-            // update profile image
-            UploadTask uploadTask = storageRef.putBytes(imgData);
-
-            // Register observers to listen for when the download is done or if it fails
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                    Log.d("TAG", "onFailure: Upload fails");
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                    Log.d("TAG", "onFailure: Upload successfully");
-                }
-            });
+        Log.d("TAG", "setImageToView: "+bundle);
+        Bitmap bitmap;
+        if(bundle != null){
+            bitmap = bundle.getParcelable("data");
+        }else{
+            bitmap =  MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
         }
+        StorageReference storageRef = storage.getReference().child("profileImages/"+username+".jpg");
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+        profileImg.setImageBitmap(bitmap);
+        byte[] imgData = baos.toByteArray();
+
+        // update profile image
+        UploadTask uploadTask = storageRef.putBytes(imgData);
+
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Log.d("TAG", "onFailure: Upload fails");
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                Log.d("TAG", "onSuccess: Upload successfully");
+            }
+        });
     }
 
     @Override
