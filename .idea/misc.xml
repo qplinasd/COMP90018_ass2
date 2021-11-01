@@ -21,6 +21,14 @@
         <entry key="..\:/Recommend/app/src/main/res/layout/recommend_city.xml" value="0.23233695652173914" />
         <entry key="..\:/Recommend/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.27076923076923076" />
         <entry key="..\:/Recommend/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.27076923076923076" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/activity_detail.xml" value="0.13072916666666667" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/activity_login.xml" value="0.13072916666666667" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/activity_main.xml" value="0.13072916666666667" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/fragment_detail.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/fragment_my.xml" value="0.13072916666666667" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/fragment_post.xml" value="0.1265625" />
+        <entry key="..\:/Users/HortenHa/AndroidStudioProjects/COMP90018_ass2/app/src/main/res/layout/menu.xml" value="0.13072916666666667" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.275" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/attraction_tab_indicator.xml" value="0.275" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/button_add_image.xml" value="0.275" />
@@ -53,12 +61,9 @@
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/content_main.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/country_fragment.xml" value="0.2" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/country_recycler_cities.xml" value="0.21331521739130435" />
-        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/dialog_photo.xml" value="0.21784420289855072" />
-        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/dialog_settings.xml" value="0.264" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_home.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_maps.xml" value="0.22871376811594202" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_my.xml" value="0.264" />
-        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_password.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_post.xml" value="0.264" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_profile_list.xml" value="0.20923913043478262" />
