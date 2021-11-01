@@ -54,8 +54,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
                 startActivity(new Intent(getActivity(), DetailActivity.class));
             }
         });
-        button  = binding.jumpPublish;
+        button  = (Button) view.findViewById(R.id.jump_publish);
         button.setOnClickListener(new View.OnClickListener() {
+            //@SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
 
@@ -78,8 +79,8 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         for(int i=0;i<20;i++){
             //后续改成读取数据，文章标题、作者、封面、文章内容
             Map  map = new HashMap();
-            map.put("title","null");
-            map.put("image",null);
+            map.put("title","Title"+i);
+            map.put("image",R.drawable.country_test_background2);
             list.add(map);
         }
         return list;
