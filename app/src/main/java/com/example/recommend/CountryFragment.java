@@ -68,7 +68,7 @@ public class CountryFragment extends Fragment{
 
         Bundle args = getArguments();
         selectedPosition = 0;
-        if(args.getString("country")==null){
+        if(args==null){
             country = "Australia";
         }
         else{
