@@ -1,3 +1,5 @@
+Please do not misoperate and lose the commit log again.
+______________________________________________________
 # COMP90018_ass2
 UniMel_ass2
 
