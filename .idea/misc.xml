@@ -89,7 +89,12 @@
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.13125" />
         <entry key="app/src/main/res/drawable/spinner_sla.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/drawable/spinner_styles.xml" value="0.10277777777777777" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.14492753623188406" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2835970770745852" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.1398176291793313" />
+        <entry key="app/src/main/res/layout/activity_postdetail.xml" value="0.14492753623188406" />
+        <entry key="app/src/main/res/layout/activity_sharelist.xml" value="0.1398176291793313" />
         <entry key="app/src/main/res/layout/attraction_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/attraction_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/city_fragment.xml" value="0.16620681340645754" />
@@ -102,7 +107,9 @@
         <entry key="app/src/main/res/layout/country_recycler_destinations.xml" value="0.319282717573103" />
         <entry key="app/src/main/res/layout/country_recycler_item.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/layout/dropdown_items.xml" value="0.11979166666666667" />
+        <entry key="app/src/main/res/layout/fragment_my.xml" value="0.14492753623188406" />
         <entry key="app/src/main/res/layout/item_countries.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/post_item.xml" value="0.14492753623188406" />
         <entry key="app/src/main/res/layout/selected_items.xml" value="0.11979166666666667" />
       </map>
     </option>

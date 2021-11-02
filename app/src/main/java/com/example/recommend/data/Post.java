@@ -14,6 +14,15 @@ public class Post {
     private String date;
 
     public Post() {
+
+    }
+
+    public Post(String name, String title, String location, String content,String date) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        this.location = location;
+        this.date = date;
     }
 
     @Exclude

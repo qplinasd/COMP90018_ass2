@@ -71,7 +71,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private static final int CAMERA_REQUEST_CODE = 103;
     private File tempFile = null;
     private FirebaseStorage storage;
-
+    private TextView text_share;
     private TextView text_settings;
     private TextView text_password_update;
     private SwitchCompat switch_shake_undo;
@@ -99,7 +99,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
         btn_album = dialog.findViewById(R.id.btn_album);
         btn_cancel = dialog.findViewById(R.id.btn_cancel);
         text_my_profile = binding.textMyProfile;
-
+        text_share = binding.textShare;
         storage = FirebaseStorage.getInstance();
 
         text_settings = binding.textSettings;
@@ -165,6 +165,14 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        text_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ShareListActivity.class));
+            }
+        });
+
+
         text_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,6 +231,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
                 .into(profileImg);
 
     }
+
 
 
     public void showGenderImg(String imgName){
