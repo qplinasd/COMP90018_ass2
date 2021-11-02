@@ -3,67 +3,173 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".PostDetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PostDetailActivity"
+    android:background="@drawable/country_background_mask" >
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/text_grey">
+        <ImageButton
+            android:id="@+id/button_return_sharelist"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="2dp"
+            android:backgroundTint="@color/cardview_shadow_end_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/abc_vector_test"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:tint="@color/green" />
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="10dp" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginVertical="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/profile_image_test"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toRightOf="@+id/button_return_sharelist"
+            />
 
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="50dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="100dp"
-            android:text="content"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="200dp"
-            android:text="title"
-            android:textAlignment="center"
-            android:textSize="34sp" />
         <TextView
             android:id="@+id/author"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:layout_marginLeft="10dp"
             android:text="author"
-            android:textAlignment="center"
-            android:textSize="34sp" />
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:text="location"
-            android:textAlignment="center"
-            android:textSize="34sp" />
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:text="date"
-            android:textAlignment="center"
-            android:textSize="34sp" />
-    </LinearLayout>
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/img"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/layout_top"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="vertical">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageButton
+                android:id="@+id/button_left_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cardview_shadow_end_color"
+                android:rotationY="180"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/right_vector"
+                app:layout_constraintBottom_toTopOf="@+id/title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageButton>
+            <ImageView
+                android:id="@+id/post_image"
+                android:layout_width="315dp"
+                android:layout_height="300dp"
+                android:src="@drawable/background_share"
+                android:scaleType="centerCrop"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/title">
+
+            </ImageView>
+
+            <ImageButton
+                android:id="@+id/button_right_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/title"
+                android:src="@drawable/right_vector"
+                android:background="@color/cardview_shadow_end_color">
+
+            </ImageButton>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="title"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/cream"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/post_image"/>
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Hello, world"
+                android:textSize="20dp"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"/>
+
+            <ImageView
+                android:id="@+id/image_location"
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/icon_location"
+                app:layout_constraintTop_toBottomOf="@id/content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/location">
+
+            </ImageView>
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="location"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/brown"
+                android:layout_marginTop="22dp"
+
+                app:layout_constraintLeft_toRightOf="@id/image_location"
+                app:layout_constraintTop_toBottomOf="@id/content"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:text="2021-11-02 11:00"
+                android:textSize="16sp"
+                android:textColor="#6F7071"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/location"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
