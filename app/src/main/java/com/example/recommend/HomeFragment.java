@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
             //@SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getActivity(), PostActivity.class));
             }
         });
         return view;
