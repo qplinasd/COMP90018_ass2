@@ -95,6 +95,7 @@
         <entry key="app/src/main/res/drawable/spinner_sla.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/drawable/spinner_styles.xml" value="0.10277777777777777" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2835970770745852" />
+        <entry key="app/src/main/res/layout/activity_postdetail.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/attraction_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/attraction_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/city_fragment.xml" value="0.16620681340645754" />

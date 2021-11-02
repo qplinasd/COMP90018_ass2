@@ -288,7 +288,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                             .show();
                 }
 
-
+                getActivity().finish();
                 break;
             default:
                 // add more images

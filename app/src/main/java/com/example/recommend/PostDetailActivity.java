@@ -7,6 +7,8 @@ package com.example.recommend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +21,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private TextView author;
     private TextView date;
     private TextView title;
-
+    private ImageButton button_return_sharelist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class PostDetailActivity extends AppCompatActivity {
         author = (TextView) findViewById(R.id.author);
         date = (TextView) findViewById(R.id.date);
         title = (TextView) findViewById(R.id.title);
-
+        button_return_sharelist = (ImageButton) findViewById(R.id.button_return_sharelist);
         Intent intent = getIntent();
 
 
@@ -51,8 +53,13 @@ public class PostDetailActivity extends AppCompatActivity {
 
 
         }
+        button_return_sharelist.setOnClickListener(new View.OnClickListener() {
 
-
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
