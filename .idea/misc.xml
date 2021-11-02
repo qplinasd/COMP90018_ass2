@@ -38,6 +38,7 @@
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/point_on.xml" value="0.275" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/drawable/user_button.xml" value="0.275" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/font/roboto_mono.xml" value="0.2890625" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_detail.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_favourite.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_guide.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_login.xml" value="0.264" />
@@ -45,7 +46,9 @@
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_maps.xml" value="0.22871376811594202" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_navigation.xml" value="0.1390625" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_post.xml" value="0.22871376811594202" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_postdetail.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_registered.xml" value="0.264" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_sharelist.xml" value="0.264" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/activity_splash.xml" value="0.264" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/attraction_fragment.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/attraction_item.xml" value="0.21331521739130435" />
@@ -63,11 +66,13 @@
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_post.xml" value="0.264" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_profile_list.xml" value="0.20923913043478262" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/fragment_share.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/item_my.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/menu.xml" value="0.20108695652173914" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/pager_item_one.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/pager_item_three.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/pager_item_two.xml" value="0.2" />
+        <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/layout/post_item.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/Sameen/Desktop/COMP90018_ass2/app/src/main/res/menu/navigation_items.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/Sameen/Desktop/Recommend/app/src/main/res/drawable/spinner_sla.xml" value="0.275" />
         <entry key="..\:/Users/Sameen/Desktop/Recommend/app/src/main/res/layout/activity_main.xml" value="0.13722826086956522" />
@@ -89,12 +94,7 @@
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.13125" />
         <entry key="app/src/main/res/drawable/spinner_sla.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/drawable/spinner_styles.xml" value="0.10277777777777777" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.14492753623188406" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2835970770745852" />
-        <entry key="app/src/main/res/layout/activity_post.xml" value="0.1398176291793313" />
-        <entry key="app/src/main/res/layout/activity_postdetail.xml" value="0.14492753623188406" />
-        <entry key="app/src/main/res/layout/activity_sharelist.xml" value="0.1398176291793313" />
         <entry key="app/src/main/res/layout/attraction_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/attraction_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/city_fragment.xml" value="0.16620681340645754" />
@@ -107,9 +107,7 @@
         <entry key="app/src/main/res/layout/country_recycler_destinations.xml" value="0.319282717573103" />
         <entry key="app/src/main/res/layout/country_recycler_item.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/layout/dropdown_items.xml" value="0.11979166666666667" />
-        <entry key="app/src/main/res/layout/fragment_my.xml" value="0.14492753623188406" />
         <entry key="app/src/main/res/layout/item_countries.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/post_item.xml" value="0.14492753623188406" />
         <entry key="app/src/main/res/layout/selected_items.xml" value="0.11979166666666667" />
       </map>
     </option>

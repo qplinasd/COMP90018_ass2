@@ -6,9 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".ShareListActivity">
 
+    <ImageView
+        android:id="@+id/image_head_city"
+        android:layout_width="483dp"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_share" />
+
+    <ImageView
+        android:id="@+id/background1"
+        android:layout_width="439dp"
+        android:layout_height="740dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/country_background_mask" />
+
+
+    <ImageButton
+        android:id="@+id/button_return_my"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/cardview_shadow_end_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        tools:ignore="SpeakableTextPresentCheck" />
+
 
     <ListView
         android:id="@+id/shareListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toBottomOf="@id/button_return_my"
+        android:layout_marginTop="200dp"
+        tools:listitem="@layout/post_item" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

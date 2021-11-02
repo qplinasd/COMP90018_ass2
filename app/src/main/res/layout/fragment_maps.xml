@@ -26,12 +26,12 @@
 
         <TextView
             android:id="@+id/text_save_location"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
             app:layout_constraintTop_toTopOf="parent"
             map:layout_constraintRight_toRightOf="parent"
             map:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="12dp"
             android:text="Finish"
             android:textSize="16dp"
             android:background="@drawable/button_bg"
