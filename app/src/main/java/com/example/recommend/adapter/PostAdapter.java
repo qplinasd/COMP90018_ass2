@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Created by Haoran Lin on 2021/11/2.
+ * * stuId:1019019
  */
 public class PostAdapter extends BaseAdapter {
 

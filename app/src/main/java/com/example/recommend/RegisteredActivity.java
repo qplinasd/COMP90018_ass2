@@ -1,17 +1,13 @@
 package com.example.recommend;
 /**
  * Created by Haoran Lin on 2021/10/26.
+ * * stuId:1019019
  */
 
-import static com.example.recommend.R.id.btn_login;
-
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,9 +26,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 

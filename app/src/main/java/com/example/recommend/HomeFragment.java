@@ -1,6 +1,5 @@
 package com.example.recommend;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,12 +12,7 @@ import android.widget.SimpleAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.example.recommend.databinding.AttractionFragmentBinding;
 import com.example.recommend.databinding.FragmentHomeBinding;
-import com.example.recommend.databinding.FragmentMyBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +21,7 @@ import java.util.Map;
 
 /**
  * Created by Haoran Lin on 2021/10/26.
+ *  * stuId:1019019
  */
 public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener,View.OnClickListener {
 
@@ -51,7 +46,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getActivity(), DetailActivity.class));
+                startActivity(new Intent(getActivity(), PostDetailActivity.class));
             }
         });
         button  = (Button) view.findViewById(R.id.jump_publish);

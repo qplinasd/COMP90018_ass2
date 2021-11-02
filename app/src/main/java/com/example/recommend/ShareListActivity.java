@@ -36,6 +36,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Created by Haoran Lin on 2021/10/26.
+ * stuId:1019019
  */
 public class ShareListActivity extends AppCompatActivity implements ChildEventListener {
     private ActivitySharelistBinding binding;
@@ -73,7 +74,7 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
         button_return_my.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 
@@ -81,7 +82,7 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Log.d("click","dddddddddd");
                 Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
                 intent.putExtra("title", mList.get(position).getTitle());
                 intent.putExtra("location", mList.get(position).getLocation());

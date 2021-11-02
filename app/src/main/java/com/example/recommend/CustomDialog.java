@@ -2,10 +2,10 @@ package com.example.recommend;
 
 /**
  * Created by Haoran Lin on 2021/10/26.
+ * * stuId:1019019
  */
 import android.app.Dialog;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;

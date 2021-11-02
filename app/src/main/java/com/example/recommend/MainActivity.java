@@ -1,6 +1,7 @@
 package com.example.recommend;
 /**
  * Created by Haoran Lin on 2021/10/26.
+ * * stuId:1019019
  */
 
 import android.content.Intent;

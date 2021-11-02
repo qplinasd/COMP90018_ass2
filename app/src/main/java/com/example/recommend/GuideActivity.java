@@ -1,6 +1,7 @@
 package com.example.recommend;
 /**
  * Created by Haoran Lin on 2021/10/26.
+ * * stuId:1019019
  */
 
 import android.content.Intent;
@@ -20,12 +21,12 @@ import java.util.List;
 public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager mViewPager;
-    //容器
+
     private List<View> mList = new ArrayList<>();
     private View view1, view2, view3;
-    //小圆点
+    //small circle
     private ImageView point1, point2, point3;
-    //跳过
+    //skip
     private ImageView iv_back;
 
     private TextView   tv_pager_1,tv_pager_2,tv_pager_3;
@@ -38,7 +39,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         initView();
     }
 
-    //初始化View
+    //init
     private void initView() {
 
         point1 = (ImageView) findViewById(R.id.point1);
@@ -63,17 +64,17 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         mList.add(view2);
         mList.add(view3);
 
-        //设置适配器
+
         mViewPager.setAdapter(new GuideAdapter());
 
-        //监听ViewPager滑动
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
 
-            //pager切换
+            //pager change
             @Override
             public void onPageSelected(int position) {
 
@@ -136,7 +137,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    //设置小圆点的选中效果
+    //circle click
     private void setPointImg(boolean isCheck1, boolean isCheck2, boolean isCheck3) {
         if (isCheck1) {
             point1.setBackgroundResource(R.drawable.point_on);

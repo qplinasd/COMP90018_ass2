@@ -2,6 +2,7 @@ package com.example.recommend;
 
 /**
  * Created by Haoran Lin on 2021/10/26.
+ * * stuId:1019019
  */
 
 import android.content.Intent;
@@ -36,16 +37,17 @@ public class PostDetailActivity extends AppCompatActivity {
 
 //        final String url = intent.getStringExtra("url");
         if (intent != null) {
-            String t = intent.getStringExtra("title");
-            String c = intent.getStringExtra("content");
-            String l = intent.getStringExtra("location");
-            String a = intent.getStringExtra("author");
-            String d = intent.getStringExtra("date");
-            title.setText(t);
-            content.setText(c);
-            location.setText(l);
-            author.setText(a);
-            date.setText(d);
+            String text_title = intent.getStringExtra("title");
+            String text_content = intent.getStringExtra("content");
+            String text_location = intent.getStringExtra("location");
+            String text_author = intent.getStringExtra("author");
+            String text_date = intent.getStringExtra("date");
+
+            title.setText(text_title);
+            content.setText(text_content);
+            location.setText(text_location);
+            author.setText(text_author);
+            date.setText(text_date);
 
 
         }
