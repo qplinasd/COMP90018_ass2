@@ -57,6 +57,9 @@
             android:name=".ShareListActivity"
             android:theme="@style/NoActivityFullscreen" />
         <activity
+            android:name=".PostDetailActivity"
+            android:theme="@style/NoActivityFullscreen" />
+        <activity
             android:name=".DetailActivity"
             android:theme="@style/NoActivityFullscreen" />
         <activity

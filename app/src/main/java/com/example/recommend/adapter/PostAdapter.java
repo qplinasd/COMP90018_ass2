@@ -60,6 +60,8 @@ public class PostAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(R.layout.post_item, null);
             viewHolder.iv_img = (ImageView) convertView.findViewById(R.id.iv_img);
+            viewHolder.tv_author = (TextView) convertView.findViewById(R.id.tv_author);
+            viewHolder.tv_date = (TextView) convertView.findViewById(R.id.tv_date);
             viewHolder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
             viewHolder.tv_location = (TextView) convertView.findViewById(R.id.tv_location);
             convertView.setTag(viewHolder);

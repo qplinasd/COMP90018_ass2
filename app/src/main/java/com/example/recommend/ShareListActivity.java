@@ -40,10 +40,6 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
     private static final String FirebaseURL = "https://comp90018-a2-default-rtdb.asia-southeast1.firebasedatabase.app/";
     private ListView mListView;
     private List<Post> mList = new ArrayList<>();
-    //标题
-    private List<String> mListTitle = new ArrayList<>();
-    //地址
-    private List<String> mListLocation = new ArrayList<>();
     private MyApplication app;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,48 +62,38 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
 
     }
 
-    //初始化View
+    //init View
     private void findView() {
         mListView = binding.shareListView;
 
-        //点击事件
+        //clicking
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
-                intent.putExtra("title", mListTitle.get(position));
-                intent.putExtra("location", mListLocation.get(position));
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("location", mList.get(position).getLocation());
+                intent.putExtra("date", mList.get(position).getDate());
+                intent.putExtra("author", mList.get(position).getAuthor());
+                intent.putExtra("content", mList.get(position).getContent());
+
                 startActivity(intent);
             }
         });
     }
 
-    //解析Json
-    private void parsingJson(String t) {
-        try {
-            JSONObject jsonObject = new JSONObject(t);
-            JSONObject jsonresult = jsonObject.getJSONObject("result");
-            JSONArray jsonList = jsonresult.getJSONArray("list");
-            for (int i = 0; i < jsonList.length(); i++) {
+    private void addPost(Post post) {
+        mList.add(post);
 
-//                mList.add(data);
-//
-//                mListTitle.add(titlr);
-//                mListLocation.add(url);
-            }
-            PostAdapter adapter = new PostAdapter(this, mList);
-            mListView.setAdapter(adapter);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-        Post posts = snapshot.getValue(Post.class);
-        Log.i("postdata",posts.toString());
-//        parsingJson(posts.toString());
+        Post post = snapshot.getValue(Post.class);
+        addPost(post);
+        PostAdapter adapter = new PostAdapter(this, mList);
+        mListView.setAdapter(adapter);
     }
 
     @Override
