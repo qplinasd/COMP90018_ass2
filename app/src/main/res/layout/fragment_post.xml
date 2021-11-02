@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/brown"
+    android:background="@drawable/city_background_mask"
     tools:context=".PostFragment">
 
 
@@ -14,6 +14,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
         android:backgroundTint="@color/cardview_shadow_end_color"
+        android:tint="@color/green"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/abc_vector_test"
@@ -37,8 +38,8 @@
 
             <ImageView
                 android:id="@+id/button_add_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@drawable/post_add_image"
 
                 android:scaleType="centerCrop"
@@ -60,6 +61,8 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:hint="Title"
+        android:textColor="@color/text_grey"
+        android:textColorHint="@color/brown"
         android:background="@color/cardview_shadow_end_color">
 
     </EditText>
@@ -82,6 +85,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:hint="Type your content"
+        android:textColor="@color/text_grey"
+        android:textColorHint="@color/brown"
         android:minLines="5"
         android:gravity="top"
         android:background="@color/cardview_shadow_end_color">
@@ -129,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="Location"
+                android:textColor="@color/text_grey"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
