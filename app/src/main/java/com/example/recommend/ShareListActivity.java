@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.recommend.adapter.PostAdapter;
@@ -41,6 +43,7 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
     private ListView mListView;
     private List<Post> mList = new ArrayList<>();
     private MyApplication app;
+    private ImageButton button_return_my;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,14 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
     //init View
     private void findView() {
         mListView = binding.shareListView;
+        button_return_my = binding.buttonReturnMy;
+
+        button_return_my.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         //clicking
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

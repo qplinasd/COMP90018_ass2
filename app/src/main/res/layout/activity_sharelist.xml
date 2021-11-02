@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ShareListActivity">
 
+    <include layout="@layout/content_main" />
+
     <ImageView
         android:id="@+id/image_head_city"
         android:layout_width="483dp"

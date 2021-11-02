@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -64,6 +65,9 @@ public class PostAdapter extends BaseAdapter {
             viewHolder.tv_date = (TextView) convertView.findViewById(R.id.tv_date);
             viewHolder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
             viewHolder.tv_location = (TextView) convertView.findViewById(R.id.tv_location);
+
+//            viewHolder.btn_favourite = (ImageButton)convertView.findViewById(R.id.btn_favourite);
+//            viewHolder.btn_delete = (ImageButton)convertView.findViewById(R.id.btn_delete);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -87,5 +91,8 @@ public class PostAdapter extends BaseAdapter {
         private TextView tv_author;
         private TextView tv_location;
         private TextView tv_date;
+
+//        private ImageButton btn_favourite;
+//        private ImageButton btn_delete;
     }
 }
