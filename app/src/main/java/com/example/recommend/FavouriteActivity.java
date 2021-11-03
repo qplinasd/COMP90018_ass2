@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.recommend.adapter.PostAdapter;
 import com.example.recommend.application.MyApplication;
@@ -40,6 +41,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
     private MyApplication app;
     private ImageButton button_return_my;
     private List<Post> postsList = new ArrayList<>();
+    private PostAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
                 finish();
             }
         });
-
+        adapter = new PostAdapter(this, postsList);
         //clicking
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,6 +89,15 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
                 intent.putExtra("key", mList.get(position).getPostKey());
 
                 startActivity(intent);
+            }
+        });
+        //ListView item delete event
+        adapter.setOnItemDeleteClickListener(new PostAdapter.onItemDeleteListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                postsList.remove(position);
+                Toast.makeText(FavouriteActivity.this, "delete item:" + position, Toast.LENGTH_SHORT).show();
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -125,7 +136,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
         Post post = snapshot.getValue(Post.class);
 
         postsList.add(post);
-        PostAdapter adapter = new PostAdapter(this, postsList);
+
         mListView.setAdapter(adapter);
     }
 
