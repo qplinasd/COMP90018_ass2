@@ -120,6 +120,9 @@ public class MyFragment extends Fragment implements ChildEventListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        app = (MyApplication) getActivity().getApplication();
+        switch_shake_undo.setChecked(app.getShakeUndoOn());
+
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,7 +211,6 @@ public class MyFragment extends Fragment implements ChildEventListener {
         switch_shake_undo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                app = (MyApplication) getActivity().getApplication();
                 app.setShakeUndoOn(isChecked);
             }
         });

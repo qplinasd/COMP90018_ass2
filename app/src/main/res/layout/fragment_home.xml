@@ -5,18 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".HomeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="#CD284747">
 
         <ImageView
+            android:id="@+id/btn_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/camera" />
+            android:src="@drawable/camera"
+            app:tint="@color/text_grey" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,18 +33,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="13dp"
                 android:layout_marginRight="13dp"
-                android:text="HomePage"
-                android:textColor="#000000"
+                android:text="Travel Diary"
+                android:textColor="@color/text_grey"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/search" />
+            android:visibility="invisible"
+            android:src="@drawable/search"/>
     </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -51,7 +56,8 @@
         app:srlEnableHeaderTranslationContent="false"
         app:srlEnableNestedScrolling="true"
         app:srlEnablePreviewInEditMode="false"
-        app:srlReboundDuration="100">
+        app:srlReboundDuration="100"
+        android:background="@color/cream">
 
         <com.scwang.smartrefresh.header.MaterialHeader
             android:id="@+id/header"
@@ -62,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/recycler_view"
+            tools:listitem="@layout/list_item"
             />
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter

@@ -76,7 +76,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("click","dddddddddd");
+
                 Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
                 intent.putExtra("title", postsList.get(position).getTitle());
                 intent.putExtra("location", postsList.get(position).getLocation());

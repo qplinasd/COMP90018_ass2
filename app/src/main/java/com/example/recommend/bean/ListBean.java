@@ -1,23 +1,33 @@
 package com.example.recommend.bean;
 
+import com.google.firebase.storage.StorageReference;
+
 import java.util.List;
 
 public class ListBean {
     private String createTime;
     private String name;
-    private int like;
-    private int comment;
-    private List<Integer> images;
-    private String content;
-    private int headImg;
+    private List<StorageReference> images;
+    private String title;
     private int ImgBig = -1;
+    private String location;
+    private String key;
+    private String content;
 
 
-    public List<Integer> getImages() {
+    public List<StorageReference> getImages() {
         return images;
     }
 
-    public void setImages(List<Integer> images) {
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setImages(List<StorageReference> images) {
         this.images = images;
     }
 
@@ -29,22 +39,12 @@ public class ListBean {
         ImgBig = imgBig;
     }
 
-    public int getHeadImg() {
-        return headImg;
+    public String getTitle() {
+        return title;
     }
 
-    public void setHeadImg(int headImg) {
-        this.headImg = headImg;
-    }
-
-
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCreateTime() {
@@ -63,19 +63,19 @@ public class ListBean {
         this.name = name;
     }
 
-    public int getLike() {
-        return like;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public int getComment() {
-        return comment;
+    public String getKey() {
+        return key;
     }
 
-    public void setComment(int comment) {
-        this.comment = comment;
+    public void setKey(String key) {
+        this.key = key;
     }
 }
