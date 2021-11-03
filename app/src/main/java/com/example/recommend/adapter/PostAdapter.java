@@ -11,8 +11,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.signature.ObjectKey;
+import com.example.recommend.GlideApp;
 import com.example.recommend.R;
 import com.example.recommend.data.Post;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -26,7 +30,7 @@ public class PostAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Post> mList;
     private Post data;
-    private int width,height;
+    private int width, height;
     private WindowManager wm;
 
     public PostAdapter(Context mContext, List<Post> mList) {
@@ -68,22 +72,45 @@ public class PostAdapter extends BaseAdapter {
             viewHolder.tv_location = (TextView) convertView.findViewById(R.id.tv_location);
 
 //            viewHolder.btn_favourite = (ImageButton)convertView.findViewById(R.id.btn_favourite);
-//            viewHolder.btn_delete = (ImageButton)convertView.findViewById(R.id.btn_delete);
+            viewHolder.btn_delete = (ImageButton) convertView.findViewById(R.id.btn_delete);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        viewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemDeleteListener.onDeleteClick(position);
+            }
+        });
         data = mList.get(position);
         viewHolder.tv_title.setText(data.getTitle());
         viewHolder.tv_author.setText(data.getAuthor());
         viewHolder.tv_location.setText(data.getLocation());
         viewHolder.tv_date.setText(data.getDate());
-//        if(!TextUtils.isEmpty(data.getImgUrl())){
-//            //加载图片
-//            PicassoUtils.loadImageViewSize(mContext, data.getImgUrl(), width/3, 250, viewHolder.iv_img);
-//        }
+
+        // get user image
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("profileImages/" + data.getAuthor() + ".jpg");
+        GlideApp.with(convertView.getContext())
+                .load(storageRef)
+                .signature(new ObjectKey(System.currentTimeMillis()))
+                .error(convertView.getResources().getDrawable(R.drawable.profile_image_test))
+                .into(viewHolder.iv_img);
+
         return convertView;
+    }
+
+    /**
+     * btn_delete interface
+     */
+    public interface onItemDeleteListener {
+        void onDeleteClick(int i);
+    }
+
+    private onItemDeleteListener mOnItemDeleteListener;
+
+    public void setOnItemDeleteClickListener(onItemDeleteListener mOnItemDeleteListener) {
+        this.mOnItemDeleteListener = mOnItemDeleteListener;
     }
 
     class ViewHolder {
@@ -93,7 +120,7 @@ public class PostAdapter extends BaseAdapter {
         private TextView tv_location;
         private TextView tv_date;
 
-//        private ImageButton btn_favourite;
-//        private ImageButton btn_delete;
+        //        private ImageButton btn_favourite;
+        private ImageButton btn_delete;
     }
 }

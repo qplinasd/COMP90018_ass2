@@ -72,6 +72,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
     private File tempFile = null;
     private FirebaseStorage storage;
     private TextView text_share;
+    private TextView text_my_favourite;
     private TextView text_settings;
     private TextView text_password_update;
     private SwitchCompat switch_shake_undo;
@@ -100,6 +101,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
         btn_cancel = dialog.findViewById(R.id.btn_cancel);
         text_my_profile = binding.textMyProfile;
         text_share = binding.textShare;
+        text_my_favourite = binding.textMyFavourite;
         storage = FirebaseStorage.getInstance();
 
         text_settings = binding.textSettings;
@@ -139,7 +141,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
                 dialog.dismiss();
 
@@ -172,6 +174,12 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        text_my_favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FavouriteActivity.class));
+            }
+        });
 
         text_settings.setOnClickListener(new View.OnClickListener() {
             @Override

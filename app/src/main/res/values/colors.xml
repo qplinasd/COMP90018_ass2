@@ -22,4 +22,10 @@
     <color name="gold">#D6A266</color>
     <color name="backgroundblue">#162929</color>
     <color name="red">#F44336</color>
+
+
+    <color name="colorPrimaryDark">#F8F8F8</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="text_gray_1">#b4b4b4</color>
 </resources>

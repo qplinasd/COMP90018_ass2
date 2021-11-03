@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.recommend.adapter.PostAdapter;
 import com.example.recommend.application.MyApplication;
@@ -45,6 +46,9 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
     private List<Post> mList = new ArrayList<>();
     private MyApplication app;
     private ImageButton button_return_my;
+    private List<String> postKey = new ArrayList<>();
+    private PostAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +66,13 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
                 .getInstance(FirebaseURL)
                 .getReference("posts");
         postData.orderByChild("author").equalTo(app.getUsername()).addChildEventListener(this);
-
-
     }
 
     //init View
     private void findView() {
         mListView = binding.shareListView;
         button_return_my = binding.buttonReturnMy;
-
+        adapter = new PostAdapter(this, mList);
         button_return_my.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +84,7 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("click","dddddddddd");
+
                 Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
                 intent.putExtra("title", mList.get(position).getTitle());
                 intent.putExtra("location", mList.get(position).getLocation());
@@ -90,7 +92,18 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
                 intent.putExtra("author", mList.get(position).getAuthor());
                 intent.putExtra("content", mList.get(position).getContent());
 
+                intent.putExtra("key", postKey.get(position));
+
                 startActivity(intent);
+            }
+        });
+        //ListView item delete event
+        adapter.setOnItemDeleteClickListener(new PostAdapter.onItemDeleteListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                mList.remove(position);
+                Toast.makeText(ShareListActivity.this, "delete item:" + position, Toast.LENGTH_SHORT).show();
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -104,8 +117,10 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
         Post post = snapshot.getValue(Post.class);
         addPost(post);
-        PostAdapter adapter = new PostAdapter(this, mList);
+
         mListView.setAdapter(adapter);
+
+        postKey.add(snapshot.getKey());
     }
 
     @Override
