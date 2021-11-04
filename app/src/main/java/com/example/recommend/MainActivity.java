@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-    //初始化数据
+    //init
     private void initData() {
         mNavigation.setOnNavigationItemSelectedListener(this);
         mNavigation.setSelectedItemId(R.id.action_home);
 
     }
 
-    //初始化View
+    //inti View
     private void initView() {
 
         mNavigation = findViewById(R.id.navigation);

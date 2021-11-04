@@ -69,7 +69,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         holder.cityName.setText(cities_list.get(position).getName());
         holder.cityCountry.setText(cities_list.get(position).getCountry());
 
-        String img_url = "https://source.unsplash.com/1600x900/?random";
+        String img_url = "https://picsum.photos/800/500";
         Glide.with(holder.cardView)
                 .load(img_url)
                 .signature(new ObjectKey(position))

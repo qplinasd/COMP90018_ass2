@@ -83,7 +83,7 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
         passwordConfirm(et_pass, et_password);
         passwordConfirm(et_password, et_pass);
     }
-
+    //clicking event
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_mono"
         android:text="Top Recommended Country"
-        android:textColor="@color/brown"
+        android:textColor="@color/cream"
         app:layout_constraintBottom_toTopOf="@+id/country_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:text="Popular Australian destinations include the coastal cities of Sydney, Brisbane and Melbourne, as well as other high-profile destinations including regional Queensland, the Gold Coast and the Great Barrier Reef, the world's largest reef. Uluru and the Australian outback are other popular locations, as is the Tasmanian wilderness. "
         android:textAlignment="center"
-        android:textColor="@color/brown"
+        android:textColor="@color/cream"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
