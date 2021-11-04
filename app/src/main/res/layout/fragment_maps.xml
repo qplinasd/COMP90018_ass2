@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/green">
+        android:background="@color/backgroundblue">
         <ImageButton
             android:id="@+id/button_return_post"
             android:layout_width="wrap_content"
