@@ -121,6 +121,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
             Bundle savedInstanceState
     ) {
 
+        // binding XML components
         binding = FragmentPostBinding.inflate(inflater, container, false);
         button_return_home = binding.buttonReturnHome;
         button_add_image = binding.buttonAddImage;
@@ -152,6 +153,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // button click events
         button_return_home.setOnClickListener(this);
         button_add_image.setOnClickListener(this);
         button_post.setOnClickListener(this);
@@ -251,7 +253,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                 for(int i=0;i<imageUriList.size();i++){
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUriList.get(i));
-//                        imageList.add(bitmap);
+
                         //save post images to firebase storage
                         StorageReference storageRef = storage.getReference().child("posts/"+key+"/"+i+".jpg");
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -283,7 +285,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     startActivity(new Intent(getContext(), MainActivity.class));
-//                                    getActivity().finish();
                                 }
                             })
                             .show();
@@ -305,11 +306,10 @@ public class PostFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onMediaFilesPicked(MediaFile[] mediaFiles, MediaSource mediaSource) {
                 if (mediaFiles.length == 1){
+                    // get image uri
                     Uri contentUri = Uri.fromFile(mediaFiles[0].getFile());
-//                    button_add_image.setImageURI(contentUri);
-
                     imageUriList.add(contentUri);
-
+                    // set images
                     for(int i=0;i<imageUriList.size();i++){
                         imageList.get(i).setImageURI(imageUriList.get(i));
                     }
@@ -336,11 +336,13 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showDialog() {
+        // shake to undo alert dialog
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setMessage("Undo Typing");
         dialog.setPositiveButton("Undo", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // undo the entering
                 text_post_content.setText("");
                 dialog.dismiss();
                 hasShaked = false;
@@ -350,6 +352,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // close the alert
                 dialog.dismiss();
                 hasShaked = false;
             }

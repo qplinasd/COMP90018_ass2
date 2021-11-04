@@ -1,10 +1,5 @@
 package com.example.recommend;
-/**
- * Created by Haoran Lin on 2021/10/26.
- * * stuId:1019019
- */
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,13 +14,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         {
 
     private ActivityMainBinding binding;
-    //Navigation
+    // Navigation
     private BottomNavigationView mNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // binding view
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -34,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-    //init
+    //init data
     private void initData() {
         mNavigation.setOnNavigationItemSelectedListener(this);
         mNavigation.setSelectedItemId(R.id.action_home);
@@ -51,17 +47,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Intent intent = getIntent();
         switch (item.getItemId()){
             case R.id.action_home:
+                // jump to home fragment
                 HomeFragment homeFragment = new HomeFragment();
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment).commit();
                 return true;
             case R.id.action_share:
+                // jump to recommend fragment
                 CountryFragment countryFragment = new CountryFragment();
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main,countryFragment).commit();
                 return true;
             case R.id.action_my:
+                // jump to my fragment
                 MyFragment myFragment = new MyFragment();
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main,myFragment).commit();
                 return true;

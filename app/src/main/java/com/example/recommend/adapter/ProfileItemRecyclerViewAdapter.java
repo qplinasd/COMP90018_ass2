@@ -44,6 +44,7 @@ public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<Profile
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        // set user data for each component
         if(position == 0){
             holder.mItemNameView.setText("Username");
             holder.mContentView.setText(user.get(0).getUsername());
@@ -61,6 +62,7 @@ public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<Profile
             holder.mContentView.setText(user.get(0).getDescription());
         }
 
+        // set click event fot user image changing
         holder.profile_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +86,6 @@ public class ProfileItemRecyclerViewAdapter extends RecyclerView.Adapter<Profile
             super(itemView);
             mItemNameView = itemView.findViewById(R.id.item_name);
             mContentView = itemView.findViewById(R.id.item_content);
-
             profile_item = itemView.findViewById(R.id.profile_item);
         }
     }

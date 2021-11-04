@@ -61,6 +61,7 @@ public class PasswordFragment extends Fragment implements View.OnClickListener, 
         et_new_password = "";
         et_confirm_password = "";
 
+        // binding XML components
         btn_pass_submit = binding.btnPassSubmit;
         button_pass_return = binding.buttonPassReturn;
         edit_old_pass = binding.editOldPass;
@@ -79,13 +80,14 @@ public class PasswordFragment extends Fragment implements View.OnClickListener, 
         // submit new password
         btn_pass_submit.setOnClickListener(this);
 
-        // get user old password
+        // get user old password from database
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance(FirebaseURL)
                 .getReference("users");
 
         databaseReference.orderByChild("username").equalTo(username).addChildEventListener(this);
 
+        // textview change listener
         edit_old_pass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -1,7 +1,5 @@
 package com.example.recommend.data;
 
-import com.google.gson.annotations.SerializedName;
-
 // Tourist Attraction info
 public class TouristAttraction {
 

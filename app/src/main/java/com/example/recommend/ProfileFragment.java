@@ -53,6 +53,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // get arguments from previous page
         Bundle args = getArguments();
         user = new User(args.getString("username"),
                 args.getString("description"),
@@ -104,6 +105,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        // return to previous page
         getActivity().getSupportFragmentManager().popBackStack();
 
     }
@@ -111,6 +113,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void editProfileItem(String item, String content, int position){
         EditText inputServer = new EditText(getContext());
         inputServer.setText(content);
+        // show the dialog for changing user info
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(item).setIcon(android.R.drawable.ic_menu_edit).setView(inputServer)
                 .setNegativeButton("Cancel", null);
@@ -118,6 +121,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
             public void onClick(DialogInterface dialog, int which) {
 
+                // change user info
                 DatabaseReference databaseReference = FirebaseDatabase
                         .getInstance(FirebaseURL)
                         .getReference("users");
@@ -130,10 +134,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                                 String key = snapshot.getKey();
                                 String updateValue = inputServer.getText().toString();
                                 databaseReference.child(key).child(item).setValue(updateValue);
-
-//                                if(position == 0){
-//                                    user.setUsername(updateValue);
-//                                }
+                                // can not change username
                                 if(position == 1){
                                     user.setGender(updateValue);
                                 }

@@ -1,7 +1,6 @@
 package com.example.recommend.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,27 +19,20 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
-/**
- * Created by Haoran Lin on 2021/11/2.
- * * stuId:1019019
- */
 public class PostAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater inflater;
     private List<Post> mList;
     private Post data;
-    private int width, height;
-    private WindowManager wm;
+    private WindowManager windowManager;
 
     public PostAdapter(Context mContext, List<Post> mList) {
         this.mContext = mContext;
         this.mList = mList;
         inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        width = wm.getDefaultDisplay().getWidth();
-        height = wm.getDefaultDisplay().getHeight();
+        windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 
     }
 
@@ -63,6 +55,7 @@ public class PostAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
+            // binding XML components
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(R.layout.post_item, null);
             viewHolder.iv_img = (ImageView) convertView.findViewById(R.id.iv_img);
@@ -80,9 +73,11 @@ public class PostAdapter extends BaseAdapter {
         viewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // delete post function
                 mOnItemDeleteListener.onDeleteClick(position);
             }
         });
+        // set data fot posts
         data = mList.get(position);
         viewHolder.tv_title.setText(data.getTitle());
         viewHolder.tv_author.setText(data.getAuthor());

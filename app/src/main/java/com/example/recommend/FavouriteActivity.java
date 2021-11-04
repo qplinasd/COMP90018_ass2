@@ -2,7 +2,6 @@ package com.example.recommend;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -14,8 +13,6 @@ import com.example.recommend.application.MyApplication;
 import com.example.recommend.data.FavouritePost;
 import com.example.recommend.data.Post;
 import com.example.recommend.databinding.ActivityFavouriteBinding;
-import com.example.recommend.databinding.ActivitySharelistBinding;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,9 +27,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nashiqiye on 2021/10/26.
- */
 public class FavouriteActivity extends AppCompatActivity implements ChildEventListener, ValueEventListener {
 
     private ActivityFavouriteBinding binding;
@@ -57,6 +51,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
     public void getPostInfo() {
         app = (MyApplication) getApplication();
 
+        // get user favourite list from database
         DatabaseReference postData = FirebaseDatabase
                 .getInstance(FirebaseURL)
                 .getReference("userFavourite");
@@ -68,31 +63,33 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
         mListView = binding.favouriteListView;
         button_return_my = binding.buttonReturnMy;
 
+        // click return button
         button_return_my.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // return to previous page
                 finish();
             }
         });
         adapter = new PostAdapter(this, postsList);
-        //clicking
+        // click a post
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                // jump to post detail activity
                 Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
                 intent.putExtra("title", postsList.get(position).getTitle());
                 intent.putExtra("location", postsList.get(position).getLocation());
                 intent.putExtra("date", postsList.get(position).getDate());
                 intent.putExtra("author", postsList.get(position).getAuthor());
                 intent.putExtra("content", postsList.get(position).getContent());
-
                 intent.putExtra("key", mList.get(position).getPostKey());
 
                 startActivity(intent);
             }
         });
-        //ListView item delete event
+        // ListView item delete event
         adapter.setOnItemDeleteClickListener(new PostAdapter.onItemDeleteListener() {
             @Override
             public void onDeleteClick(int position) {
@@ -108,6 +105,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
                             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                                 FavouritePost favouritePost = snapshot.getValue(FavouritePost.class);
                                 if (favouritePost.getPostKey().equals(mList.get(position).getPostKey())){
+                                    // delete from database
                                     snapshot.getRef().removeValue();
                                 }
                             }
@@ -132,7 +130,6 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
 
                             }
                         });
-
 
                 adapter.notifyDataSetChanged();
             }
@@ -176,9 +173,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
         Post post = snapshot.getValue(Post.class);
-
         postsList.add(post);
-
         mListView.setAdapter(adapter);
     }
 

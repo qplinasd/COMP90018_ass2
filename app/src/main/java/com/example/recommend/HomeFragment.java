@@ -7,11 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,7 +20,6 @@ import com.example.recommend.adapter.ListAdapter;
 import com.example.recommend.application.MyApplication;
 import com.example.recommend.bean.ListBean;
 import com.example.recommend.data.Post;
-import com.example.recommend.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,21 +29,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
-import com.jchou.imagereview.ui.ImagePagerActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-/**
- * Created by Haoran Lin on 2021/10/26.
- *  * stuId:1019019
- */
 public class HomeFragment extends Fragment  implements ChildEventListener {
 
     private static final String FirebaseURL = "https://comp90018-a2-default-rtdb.asia-southeast1.firebasedatabase.app/";
@@ -75,38 +63,32 @@ public class HomeFragment extends Fragment  implements ChildEventListener {
         refreshLayout = view.findViewById(R.id.refreshLayout);
         btn_post = view.findViewById(R.id.btn_post);
 
+        // click post button
         btn_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // jump to post activity
                 startActivity(new Intent(getActivity(), PostActivity.class));
             }
         });
+
+        // set recycler view layout and adapter
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         listAdapter = new ListAdapter(app.getUsername());
         listAdapter.bindToRecyclerView(recyclerView);
+        // click one post
         listAdapter.setOnMyClickListener(new ListAdapter.OnMyClickListener() {
             @Override
             public void OnClickListener(View view, int position, int childrenPosition) {
-//                ListBean listBean = listAdapter.getItem(position);
-//                if (listBean == null) return;
-//                if (childrenPosition == -1) {
-//                    ArrayList<Integer> urls = new ArrayList<>();
-//                    urls.add(listBean.getImgBig());
-//                    ImagePagerActivity.startImagePage(getActivity(), urls, position,
-//                            recyclerView.getLayoutManager().findViewByPosition(position));
-//                } else {
-//                    ArrayList<Integer> urls = (ArrayList<Integer>) listBean.getImages();
-//                    ImagePagerActivity.startImagePage(getActivity(), urls, childrenPosition,
-//                            recyclerView.getLayoutManager().findViewByPosition(position));
-//                }
+
                 if(mList!=null){
+                    // jump to post detail activity
                     Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
                     intent.putExtra("title", list.get(position).getTitle());
                     intent.putExtra("location", list.get(position).getLocation());
                     intent.putExtra("date", list.get(position).getCreateTime());
                     intent.putExtra("author", list.get(position).getName());
                     intent.putExtra("content", list.get(position).getContent());
-
                     intent.putExtra("key", list.get(position).getKey());
 
                     startActivity(intent);
@@ -160,12 +142,12 @@ public class HomeFragment extends Fragment  implements ChildEventListener {
         if (page < listBeanList.size()) {
             listAdapter.addData(listBeanList.get(a + 1));
             listAdapter.addData(listBeanList.get(a + 2));
-            //recyclerView.smoothScrollToPosition(listAdapter.getData().size());
         }
     }
 
     private void setData() {
 
+        // get post data from firebase
         DatabaseReference postData = FirebaseDatabase
                 .getInstance(FirebaseURL)
                 .getReference("posts");
@@ -180,6 +162,7 @@ public class HomeFragment extends Fragment  implements ChildEventListener {
 
         ListBean listBean = new ListBean();
 
+        // set post data
         listBean.setName(post.getAuthor());
         listBean.setCreateTime(post.getDate());
         listBean.setTitle(post.getTitle());
@@ -188,6 +171,7 @@ public class HomeFragment extends Fragment  implements ChildEventListener {
         listBean.setKey(snapshot.getKey());
         listBean.setContent(post.getContent());
 
+        // read post images from firebase storage
         StorageReference listRef = FirebaseStorage.getInstance().getReference().child("posts/"+snapshot.getKey());
         listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
@@ -206,10 +190,6 @@ public class HomeFragment extends Fragment  implements ChildEventListener {
                 list.add(listBeanList.get(currentIndex));
                 currentIndex++;
 
-//                for (int i = 0; i < page; i++) {
-//
-//                    list.add(listBeanList.get(i));
-//                }
                 listAdapter.setNewData(list);
                 listAdapter.notifyDataSetChanged();
             }

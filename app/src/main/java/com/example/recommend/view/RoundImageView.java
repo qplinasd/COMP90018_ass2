@@ -9,9 +9,6 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-/**
- * 自定义圆角imageview
- */
 public class RoundImageView extends AppCompatImageView {
     float FILLET = 18;
     float width, height;

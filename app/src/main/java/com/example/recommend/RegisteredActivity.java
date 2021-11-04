@@ -1,8 +1,4 @@
 package com.example.recommend;
-/**
- * Created by Haoran Lin on 2021/10/26.
- * * stuId:1019019
- */
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -50,7 +46,6 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
     private TextView tv_inconsistent;
     private TextView tv_wrong_name;
     private TextView tv_wrong_pass;
-    private Boolean isExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +57,7 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
 
     private void initView() {
 
+        // binding XML components
         et_user = (EditText) findViewById(R.id.et_user);
         et_desc = (EditText) findViewById(R.id.et_desc);
         mRadioGroup = (RadioGroup) findViewById(R.id.mRadioGroup);
@@ -83,21 +79,23 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
         passwordConfirm(et_pass, et_password);
         passwordConfirm(et_password, et_pass);
     }
-    //clicking event
+    // click event
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnRegistered:
-
+                // user register function
                 DatabaseReference databaseReference = FirebaseDatabase
                         .getInstance(FirebaseURL)
                         .getReference("users");
 
+                // check if user already exist
                 String name = et_user.getText().toString().trim();
                 databaseReference.orderByChild("username").equalTo(name).addListenerForSingleValueEvent(this);
 
                 break;
             case R.id.btn_login:
+                // jump to log in page
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
@@ -105,11 +103,13 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId){
+        // get selected radio button text
         RadioButton mRadioButton = group.findViewById(checkedId);
         gender = mRadioButton.getText().toString().trim();
     }
 
     public void passwordConfirm(EditText password, EditText confirmPass){
+        // check confirmed password
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -134,6 +134,7 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void checkEditTextNull(EditText editText, TextView textView){
+        // check null textview
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -161,6 +162,7 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
         if(snapshot.exists()){
+            // user already exist
             new AlertDialog.Builder(this).setMessage("User already exists")
                     .setPositiveButton("confirm", null)
                     .show();
@@ -172,10 +174,12 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
             String pass = et_pass.getText().toString().trim();
             String email = et_email.getText().toString().trim();
 
+            // input values are valid
             if (tv_inconsistent.getVisibility() == View.INVISIBLE &&
                     tv_wrong_name.getVisibility() == View.INVISIBLE &&
                     tv_wrong_pass.getVisibility() == View.INVISIBLE){
 
+                // save new user to database
                 DatabaseReference databaseReference = FirebaseDatabase
                         .getInstance(FirebaseURL)
                         .getReference("users");
@@ -192,6 +196,7 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
                         .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                // jump to login page
                                 jumpToLogin();
                             }
                         }).show();

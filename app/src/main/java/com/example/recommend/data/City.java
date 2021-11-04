@@ -21,7 +21,6 @@ public class City {
         this.longitude = longitude;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }

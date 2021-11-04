@@ -1,10 +1,5 @@
 package com.example.recommend;
 
-/**
- * Created by Haoran Lin on 2021/10/26.
- * * stuId:1019019
- */
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        //delay2000ms
+        // delay2000ms
         handler.sendEmptyMessageDelayed(1001, 2000);
 
     }

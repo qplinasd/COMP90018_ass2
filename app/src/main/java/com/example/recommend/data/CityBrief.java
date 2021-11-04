@@ -9,7 +9,6 @@ public class CityBrief {
     @SerializedName("country")
     private String country;
 
-
     public String getName() {
         return name;
     }

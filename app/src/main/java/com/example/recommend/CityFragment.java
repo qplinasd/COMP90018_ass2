@@ -18,7 +18,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.bumptech.glide.signature.ObjectKey;
@@ -53,7 +52,6 @@ API
 ---------------------------------------------
 Piscum: https://picsum.photos/
 CountryFlags: https://flagcdn.com/
-Unsplash: https://source.unsplash.com
 */
 
 public class CityFragment extends Fragment{
@@ -116,7 +114,6 @@ public class CityFragment extends Fragment{
                 countryFragment.setArguments(args);
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main,countryFragment).commit();
             }
-
 
         });
 

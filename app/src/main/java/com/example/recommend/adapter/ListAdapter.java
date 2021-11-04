@@ -1,9 +1,7 @@
 package com.example.recommend.adapter;
 
-
 import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,10 +16,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.recommend.GlideApp;
 import com.example.recommend.R;
-import com.example.recommend.application.MyApplication;
 import com.example.recommend.bean.ListBean;
 import com.example.recommend.data.FavouritePost;
-import com.example.recommend.data.User;
 import com.example.recommend.view.CircleImageView;
 import com.example.recommend.view.RoundImageView;
 import com.google.firebase.database.ChildEventListener;
@@ -35,9 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
-
 
     private OnMyClickListener onMyClickListener;
     private String username;
@@ -57,10 +51,11 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
 
     @Override
     protected void convert(@NonNull final BaseViewHolder helper, ListBean item) {
+
+        // binding the xml components
         TextView nameTv = helper.getView(R.id.name_tv);
         TextView contentTv = helper.getView(R.id.content_tv);
         TextView tv_location = helper.getView(R.id.tv_location);
-
         ImageView like_tv = helper.getView(R.id.like_tv);
 
         RoundImageView roundImageView = helper.getView(R.id.round_image_view);
@@ -77,7 +72,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
                 .error(mContext.getResources().getDrawable(R.drawable.profile_image_test))
                 .into(circleImageView);
 
-        // set images
+        // set post images
         if (item.getImages() == null || item.getImages().size() == 0) {
             roundImageView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
@@ -123,7 +118,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
         nameTv.setText(item.getName());
         tv_location.setText(item.getLocation());
 
-        // user favourite post
+        // user favourite post check
         String FirebaseURL = "https://comp90018-a2-default-rtdb.asia-southeast1.firebasedatabase.app/";
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance(FirebaseURL)
@@ -135,6 +130,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 FavouritePost favouritePost = snapshot.getValue(FavouritePost.class);
                 if(favouritePost.getPostKey().equals(item.getKey())){
+                    // this post is in user's favourite list
                     like_tv.setColorFilter(Color.RED);
                     like_tv.setSelected(true);
                 }
@@ -165,7 +161,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
         like_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // this post has been adding to user favourite list
                 if(like_tv.isSelected()){
                     // delete the favourite post for user
                     like_tv.setColorFilter(Color.GRAY);
@@ -177,6 +173,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
                                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                                     FavouritePost favouritePost = snapshot.getValue(FavouritePost.class);
                                     if(favouritePost.getPostKey().equals(item.getKey())){
+                                        // remove this post from user favourite list
                                         snapshot.getRef().removeValue();
                                     }
                                 }
@@ -206,12 +203,14 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
                     // save the post to user favourite list
                     String key = databaseReference.push().getKey();
 
+                    // update user favourite list
                     FavouritePost favouritePost = new FavouritePost(username, item.getKey());
                     Map<String, Object> favouritePostValues = favouritePost.toMap();
                     Map<String, Object> childUpdates = new HashMap<>();
                     childUpdates.put(key, favouritePostValues);
 
                     databaseReference.updateChildren(childUpdates);
+                    // change the status of like button
                     like_tv.setColorFilter(Color.RED);
                     like_tv.setSelected(true);
                 }
@@ -222,5 +221,4 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
     public interface OnMyClickListener{
         void OnClickListener(View view, int position, int childrenPosition);
     }
-
 }

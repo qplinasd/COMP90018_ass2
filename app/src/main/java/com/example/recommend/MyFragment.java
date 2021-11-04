@@ -85,9 +85,11 @@ public class MyFragment extends Fragment implements ChildEventListener {
 
         binding = FragmentMyBinding.inflate(inflater, container, false);
 
+        // get login username
         app = (MyApplication) getActivity().getApplication();
         username = app.getUsername();
 
+        // binding XML components
         profileName = binding.profileName;
         profileGender = binding.profileGender;
         profileImg = binding.profileImage;
@@ -123,6 +125,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
         app = (MyApplication) getActivity().getApplication();
         switch_shake_undo.setChecked(app.getShakeUndoOn());
 
+        // click event for logout button
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,8 +135,10 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // get user information and show
         getUserInfo();
 
+        // click event for user image
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,28 +146,28 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // use camera to change user image
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
                 dialog.dismiss();
-
-//                ImagePicker.Builder imagePicker = new ImagePicker.Builder(getActivity());
             }
         });
 
+        // use album to change user image
         btn_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, IMAGE_REQUEST_CODE);
-//                new ImagePicker.Builder(getActivity()).galleryOnly().cropSquare().start();
                 dialog.dismiss();
             }
         });
 
+        // cancel changing user image
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +175,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // jump to my share list
         text_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,6 +183,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // jump to my favourite list
         text_my_favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,6 +191,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // show setting dialog
         text_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +199,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // click event for updating password
         text_password_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,6 +208,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
                 Bundle args = new Bundle();
                 args.putString("username", username);
 
+                // jump to password updating page
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 PasswordFragment passwordFragment  = new PasswordFragment();
                 passwordFragment.setArguments(args);
@@ -208,6 +218,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // shake to undo switch check
         switch_shake_undo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -215,6 +226,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             }
         });
 
+        // dismiss dialog
         btn_setting_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,13 +238,14 @@ public class MyFragment extends Fragment implements ChildEventListener {
 
     public void getUserInfo(){
 
+        // get user data from firebase
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance(FirebaseURL)
                 .getReference("users");
 
         databaseReference.orderByChild("username").equalTo(username).addChildEventListener(this);
 
-        // get profile image
+        // get profile image from firebase storage
         StorageReference storageRef = storage.getReference().child("profileImages/"+username+".jpg");
         GlideApp.with(this)
                 .load(storageRef)
@@ -246,6 +259,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
 
     public void showGenderImg(String imgName){
 
+        // show gender images beside user gender info
         Glide.with(this)
                 .load(getResources()
                         .getIdentifier(imgName, "drawable", getContext().getPackageName()))
@@ -266,10 +280,12 @@ public class MyFragment extends Fragment implements ChildEventListener {
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
         User user = snapshot.getValue(User.class);
 
+        // set user info
         profileName.setText(user.getUsername());
         profileDesc.setText(user.getDescription());
         profileGender.setText(user.getGender());
 
+        // set user gender image
         if (user.getGender().equalsIgnoreCase("female")){
             showGenderImg("icon_female");
         }
@@ -280,6 +296,7 @@ public class MyFragment extends Fragment implements ChildEventListener {
             showGenderImg("icon_male");
         }
 
+        // click event fot profile page
         text_my_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

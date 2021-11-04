@@ -4,8 +4,11 @@ import android.app.Application;
 import android.location.Address;
 
 public class MyApplication extends Application {
+    // shake undo button switch
     private Boolean IsShakeUndoOn;
+    // user current location
     private Address currentLocation;
+    // login username
     private String username;
 
     @Override

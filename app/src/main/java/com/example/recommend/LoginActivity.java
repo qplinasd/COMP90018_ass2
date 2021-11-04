@@ -1,8 +1,4 @@
 package com.example.recommend;
-/**
- * Created by Haoran Lin on 2021/10/26.
- * * stuId:1019019
- */
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initView() {
 
+        // binding XML components
         btn_registered = (Button) findViewById(R.id.btn_registered);
         btn_registered.setOnClickListener(this);
         et_name = (EditText) findViewById(R.id.et_name);
@@ -57,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         databasePassword = "";
 
+        // set textview change listener for username
         et_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -74,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 name = et_name.getText().toString().trim();
             }
         });
-
+        // set textview change listener for password
         et_password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,33 +98,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
 
             case R.id.btn_registered:
+                // jump to register activity
                 startActivity(new Intent(this, RegisteredActivity.class));
                 break;
             case R.id.btnLogin:
-
+                // read user information from database
                 DatabaseReference databaseReference = FirebaseDatabase
                         .getInstance(FirebaseURL)
                         .getReference("users");
 
                 databaseReference.orderByChild("username").equalTo(name).addChildEventListener(this);
-
         }
     }
 
     @Override
     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+        // check user existence
         if (snapshot.exists()){
             User user = snapshot.getValue(User.class);
 
+            // get user password
             databasePassword = user.getPassword();
 
             if (databasePassword.equals("")) {
+                // user not exist
                 new AlertDialog.Builder(this)
                         .setMessage("User does not exist")
                         .setPositiveButton("confirm", null)
                         .show();
             } else if (!databasePassword.equals(password)) {
+                // password is wrong
                 new AlertDialog.Builder(this)
                         .setMessage("Wrong password")
                         .setPositiveButton("confirm", null)
@@ -134,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } else {
                 app = (MyApplication) getApplication();
                 app.setUsername(name);
-
+                // jump to main activity
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("username", name);
                 startActivity(intent);

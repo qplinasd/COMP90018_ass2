@@ -1,9 +1,4 @@
 package com.example.recommend;
-/**
- * Created by Haoran Lin on 2021/10/26.
- * * stuId:1019019
- */
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,11 +19,10 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
     private List<View> mList = new ArrayList<>();
     private View view1, view2, view3;
-    //small circle
+    // small circle
     private ImageView point1, point2, point3;
-    //skip
+    // skip
     private ImageView iv_back;
-
     private TextView   tv_pager_1,tv_pager_2,tv_pager_3;
 
     @Override
@@ -42,13 +36,15 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     //init
     private void initView() {
 
+        // binding XML components
         point1 = (ImageView) findViewById(R.id.point1);
         point2 = (ImageView) findViewById(R.id.point2);
         point3 = (ImageView) findViewById(R.id.point3);
 
         iv_back= (ImageView) findViewById(R.id.iv_back);
         iv_back.setOnClickListener(this);
-        //设置默认图片
+
+        // set default image
         setPointImg(true, false, false);
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);
         view1 = View.inflate(this, R.layout.pager_item_one, null);
@@ -64,9 +60,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         mList.add(view2);
         mList.add(view3);
 
-
         mViewPager.setAdapter(new GuideAdapter());
-
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -74,7 +68,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
             }
 
-            //pager change
+            // pager change
             @Override
             public void onPageSelected(int position) {
 
@@ -106,6 +100,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_start:
             case R.id.iv_back:
+                // jump to login activity
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
@@ -133,11 +128,10 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             ((ViewPager) container).removeView(mList.get(position));
-            //super.destroyItem(container, position, object);
         }
     }
 
-    //circle click
+    // circle click
     private void setPointImg(boolean isCheck1, boolean isCheck2, boolean isCheck3) {
         if (isCheck1) {
             point1.setBackgroundResource(R.drawable.point_on);

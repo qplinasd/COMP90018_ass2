@@ -37,7 +37,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
 
     public class CountryViewHolder extends RecyclerView.ViewHolder {
 
-
         private TextView cityName, cityCountry;
         private CardView cardView;
         private RelativeLayout layout;
@@ -45,6 +44,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         public CountryViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            // bind the xml components
             cardView = itemView.findViewById(R.id.card_country_city);
             cityName = itemView.findViewById(R.id.city_name);
             cityCountry = itemView.findViewById(R.id.city_country);
@@ -69,6 +69,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         holder.cityName.setText(cities_list.get(position).getName());
         holder.cityCountry.setText(cities_list.get(position).getCountry());
 
+        // set background image
         String img_url = "https://picsum.photos/800/500";
         Glide.with(holder.cardView)
                 .load(img_url)

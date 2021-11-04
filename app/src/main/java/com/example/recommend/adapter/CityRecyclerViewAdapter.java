@@ -27,7 +27,6 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
     private List<TouristAttraction> attraction_lists;
     private clickCardItem clickCardItem;
 
-
     public CityRecyclerViewAdapter(List<TouristAttraction> lists, clickCardItem clickCardItem) {
         this.attraction_lists = lists;
         this.clickCardItem = clickCardItem;
@@ -70,6 +69,7 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
         String city_country = attraction_lists.get(position).getCity() + ", " + attraction_lists.get(position).getCountry();
         holder.text_city_country.setText(city_country);
 
+        //set the background image
         String img_url = "https://picsum.photos/800/500";
         Glide.with(holder.card_city_item)
                 .load(img_url)

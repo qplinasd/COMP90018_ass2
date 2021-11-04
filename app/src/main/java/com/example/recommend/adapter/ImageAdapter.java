@@ -19,7 +19,7 @@ public class ImageAdapter extends BaseQuickAdapter<StorageReference, BaseViewHol
     @Override
     protected void convert(@NonNull BaseViewHolder helper, StorageReference item) {
         RoundImageView roundImageView = helper.getView(R.id.round_image_view);
-//        roundImageView.setImageResource(item);
+        // set the images on home fragment
         GlideApp.with(this.mContext)
                 .load(item)
                 .signature(new ObjectKey(System.currentTimeMillis()))

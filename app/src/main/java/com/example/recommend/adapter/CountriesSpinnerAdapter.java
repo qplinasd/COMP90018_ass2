@@ -46,8 +46,8 @@ public class CountriesSpinnerAdapter extends BaseAdapter {
         View rootView = LayoutInflater.from(context)
                 .inflate(R.layout.item_countries, viewGroup, false);
 
+        // set the spinner content
         TextView txtName = rootView.findViewById(R.id.name_of_countries);
-
         txtName.setText(countriesList.get(i).getName());
 
         return rootView;

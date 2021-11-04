@@ -38,10 +38,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-/**
- * Created by Haoran Lin on 2021/10/26.
- * stuId:1019019
- */
 public class ShareListActivity extends AppCompatActivity implements ChildEventListener {
     private ActivitySharelistBinding binding;
     private static final String FirebaseURL = "https://comp90018-a2-default-rtdb.asia-southeast1.firebasedatabase.app/";
@@ -65,13 +61,14 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
     public void getPostInfo(){
         app = (MyApplication) getApplication();
 
+        // get user shared post list info
         DatabaseReference postData = FirebaseDatabase
                 .getInstance(FirebaseURL)
                 .getReference("posts");
         postData.orderByChild("author").equalTo(app.getUsername()).addChildEventListener(this);
     }
 
-    //init View
+    // init View
     private void findView() {
         mListView = binding.shareListView;
         button_return_my = binding.buttonReturnMy;
@@ -83,24 +80,23 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
             }
         });
 
-        //clicking
+        // click one post
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                // jump to post detail
                 Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
                 intent.putExtra("title", mList.get(position).getTitle());
                 intent.putExtra("location", mList.get(position).getLocation());
                 intent.putExtra("date", mList.get(position).getDate());
                 intent.putExtra("author", mList.get(position).getAuthor());
                 intent.putExtra("content", mList.get(position).getContent());
-
                 intent.putExtra("key", postKey.get(position));
 
                 startActivity(intent);
             }
         });
-        //ListView item delete event
+        // ListView item delete event
         adapter.setOnItemDeleteClickListener(new PostAdapter.onItemDeleteListener() {
             @Override
             public void onDeleteClick(int position) {
@@ -114,6 +110,7 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // delete a post
                         mList.remove(position);
                         Toast.makeText(ShareListActivity.this, "delete item:" + position, Toast.LENGTH_SHORT).show();
                         adapter.notifyDataSetChanged();
@@ -125,7 +122,6 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
                             @Override
                             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                                 snapshot.getRef().removeValue();
-//                                Log.d("TAG", "onChildAdded: "+snapshot.getKey());
                                 // delete user favourite for this post
                                 deleteUserFavourite(snapshot);
                             }
@@ -157,7 +153,6 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
 
     private void addPost(Post post) {
         mList.add(post);
-
     }
 
     private void deleteUserFavourite(DataSnapshot snapshot){
@@ -200,8 +195,8 @@ public class ShareListActivity extends AppCompatActivity implements ChildEventLi
         Post post = snapshot.getValue(Post.class);
         addPost(post);
 
+        // set list view adapter
         mListView.setAdapter(adapter);
-
         postKey.add(snapshot.getKey());
     }
 

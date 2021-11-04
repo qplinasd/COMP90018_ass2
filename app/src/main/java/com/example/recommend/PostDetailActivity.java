@@ -18,7 +18,6 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class PostDetailActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView content;
@@ -41,6 +40,7 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
 
         setContentView(R.layout.activity_postdetail);
 
+        // binding XML components
         content = (TextView) findViewById(R.id.content);
         location = (TextView) findViewById(R.id.location);
         author = (TextView) findViewById(R.id.author);
@@ -137,8 +137,10 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_left_image:
+                // left image button click event
                 if(currentImage>0){
                     currentImage -= 1;
+                    // show previous image
                     GlideApp.with(this)
                             .load(imageList.get(currentImage))
                             .error(getResources().getDrawable(R.drawable.background_share))
@@ -146,8 +148,10 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.button_right_image:
+                // right image button click event
                 if(currentImage<imageList.size()-1){
                     currentImage += 1;
+                    // show next image
                     GlideApp.with(this)
                             .load(imageList.get(currentImage))
                             .error(getResources().getDrawable(R.drawable.background_share))

@@ -44,7 +44,6 @@ API
 ---------------------------------------------
 Piscum: https://picsum.photos/
 CountryFlags: https://flagcdn.com/
-Unsplash: https://source.unsplash.com
 */
 
 public class CountryFragment extends Fragment{
@@ -58,17 +57,18 @@ public class CountryFragment extends Fragment{
     private Spinner countries_spinner;
     private CountriesSpinnerAdapter countriesSpinner;
     private int selectedPosition;
-
     private ImageView image_country;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // binding the view
         binding = CountryFragmentBinding.inflate(inflater, container, false);
 
         Bundle args = getArguments();
         selectedPosition = 0;
+        // set default demonstration country
         if(args==null){
             country = "Australia";
         }
@@ -78,7 +78,6 @@ public class CountryFragment extends Fragment{
         }
         countryRecycler = binding.recyclerViewCountry;
         image_country = binding.imageCountry;
-
         countries_spinner = binding.countriesSpinner;
         countriesSpinner = new CountriesSpinnerAdapter(getContext(), SpinnerCountries.getCountriesList());
         countries_spinner.setAdapter(countriesSpinner);
@@ -94,8 +93,11 @@ public class CountryFragment extends Fragment{
         // set the TextView data (city and country)
         binding.countryName.setText(country);
         getIntroductionFromDB(country);
+        // set country background image
         initCountryImage();
+        // set city information
         getCitiesFromDB(country);
+        // spinner click event
         clickCountrySpinner();
     }
 
@@ -154,6 +156,7 @@ public class CountryFragment extends Fragment{
                     args.putString("country", countrySelected);
                     args.putString("position", String.valueOf(position));
 
+                    // jump to country fragment
                     FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                     CountryFragment countryFragment = new CountryFragment();
                     countryFragment.setArguments(args);
