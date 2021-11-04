@@ -60,7 +60,7 @@
                 android:id="@+id/btn_favourite"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/icon_favorite"
+                android:src="@drawable/like"
                 android:scaleType="centerCrop"
                 android:background="@color/cardview_shadow_end_color"
                 android:layout_marginRight="10dp"

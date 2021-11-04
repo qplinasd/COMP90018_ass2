@@ -283,12 +283,11 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     startActivity(new Intent(getContext(), MainActivity.class));
+//                                    getActivity().finish();
                                 }
                             })
                             .show();
                 }
-
-                getActivity().finish();
                 break;
             default:
                 // add more images

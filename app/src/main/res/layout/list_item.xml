@@ -102,7 +102,7 @@
                 android:layout_marginLeft="10dp"
                 android:id="@+id/like_tv"
                 android:gravity="center_vertical"
-                />
+                app:tint="#808080" />
 
         </LinearLayout>
     </LinearLayout>

@@ -211,6 +211,7 @@ public class HomeFragment extends Fragment  implements ChildEventListener {
 //                    list.add(listBeanList.get(i));
 //                }
                 listAdapter.setNewData(list);
+                listAdapter.notifyDataSetChanged();
             }
         });
     }

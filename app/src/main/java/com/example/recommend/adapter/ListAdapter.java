@@ -3,6 +3,7 @@ package com.example.recommend.adapter;
 
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -127,6 +128,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance(FirebaseURL)
                 .getReference("userFavourite");
+        like_tv.setSelected(false);
 
         databaseReference.orderByChild("username").equalTo(username).addChildEventListener(new ChildEventListener() {
             @Override
@@ -134,6 +136,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
                 FavouritePost favouritePost = snapshot.getValue(FavouritePost.class);
                 if(favouritePost.getPostKey().equals(item.getKey())){
                     like_tv.setColorFilter(Color.RED);
+                    like_tv.setSelected(true);
                 }
             }
 
@@ -163,10 +166,41 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
             @Override
             public void onClick(View v) {
 
-                if(!(like_tv.getColorFilter()==null)&&
-                        like_tv.getColorFilter().equals(Color.RED)){
+                if(like_tv.isSelected()){
                     // delete the favourite post for user
-                    like_tv.setColorFilter(null);
+                    like_tv.setColorFilter(Color.GRAY);
+                    like_tv.setSelected(false);
+
+                    databaseReference.orderByChild("username").equalTo(username)
+                            .addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                                    FavouritePost favouritePost = snapshot.getValue(FavouritePost.class);
+                                    if(favouritePost.getPostKey().equals(item.getKey())){
+                                        snapshot.getRef().removeValue();
+                                    }
+                                }
+
+                                @Override
+                                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                                }
+
+                                @Override
+                                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                                }
+
+                                @Override
+                                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                 }
                 else{
                     // save the post to user favourite list
@@ -179,6 +213,7 @@ public class ListAdapter extends BaseQuickAdapter<ListBean, BaseViewHolder> {
 
                     databaseReference.updateChildren(childUpdates);
                     like_tv.setColorFilter(Color.RED);
+                    like_tv.setSelected(true);
                 }
             }
         });
