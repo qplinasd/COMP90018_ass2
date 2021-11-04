@@ -57,7 +57,8 @@
         app:srlEnableNestedScrolling="true"
         app:srlEnablePreviewInEditMode="false"
         app:srlReboundDuration="100"
-        android:background="@color/cream">
+        android:background="@color/cream"
+        android:layout_marginBottom="50dp">
 
         <com.scwang.smartrefresh.header.MaterialHeader
             android:id="@+id/header"
