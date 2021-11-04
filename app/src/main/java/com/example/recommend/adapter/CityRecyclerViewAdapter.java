@@ -70,21 +70,21 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
         String city_country = attraction_lists.get(position).getCity() + ", " + attraction_lists.get(position).getCountry();
         holder.text_city_country.setText(city_country);
 
-        String img_url = "https://source.unsplash.com/1600x900/?random";
+        String img_url = "https://picsum.photos/800/500";
         Glide.with(holder.card_city_item)
                 .load(img_url)
                 .signature(new ObjectKey(position))
                 .into(new CustomTarget<Drawable>() {
-            @Override
-            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                holder.layout.setBackground(resource);
-            }
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        holder.layout.setBackground(resource);
+                    }
 
-            @Override
-            public void onLoadCleared(@Nullable Drawable placeholder) {
-            }
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    }
 
-        });
+                });
 
         // set the card click event
         holder.card_city_item.setOnClickListener(new View.OnClickListener() {

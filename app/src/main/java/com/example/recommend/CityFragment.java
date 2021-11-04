@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.recommend.adapter.CityRecyclerViewAdapter;
 import com.example.recommend.data.Attraction;
 import com.example.recommend.data.CountryCode;
@@ -44,13 +45,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /*
 Framework
---------------------------------------------- 
+---------------------------------------------
 Retrofit: https://square.github.io/retrofit/
 Glide: https://github.com/bumptech/glide
 ---------------------------------------------
 API
 ---------------------------------------------
-OpenTripMap: https://opentripmap.io/product
+Piscum: https://picsum.photos/
 CountryFlags: https://flagcdn.com/
 Unsplash: https://source.unsplash.com
 */
@@ -59,7 +60,7 @@ public class CityFragment extends Fragment{
 
     private static final String APIKEY = "5ae2e3f221c38a28845f05b60618e795fe7e56472fbf4e3de4e72e30";
     private static final String FlagURL = "https://flagcdn.com/64x48/";
-    private static final String BackgroundURL = "https://source.unsplash.com/1600x900/?";
+    private static final String BackgroundURL = "https://picsum.photos/800/500";
     private static final String RetrofitURL = "https://api.opentripmap.com/0.1/en/";
 
     private CityFragmentBinding binding;
@@ -179,10 +180,10 @@ public class CityFragment extends Fragment{
 
         // initial the head image with Glide
         // this API will search for a random related image of this city
-        String img_url = BackgroundURL + city;
+        String img_url = BackgroundURL;
         Glide.with(this)
                 .load(img_url)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .signature(new ObjectKey(System.currentTimeMillis()))
                 .into(image_head_city);
     }
 
@@ -233,7 +234,7 @@ public class CityFragment extends Fragment{
 
                             attraction_lists.add(attraction);
                         }
-                        
+
                         for(int i=0 ; i<attraction_lists.size()-1;i ++ ) {
                             for(int j=attraction_lists.size()- 1;j>i;j--) {
                                 if  (attraction_lists.get(j).getName().equals(attraction_lists.get(i).getName()))  {

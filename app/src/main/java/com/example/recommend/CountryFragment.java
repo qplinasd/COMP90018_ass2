@@ -19,6 +19,7 @@ import android.widget.Spinner;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.recommend.adapter.CountriesSpinnerAdapter;
 import com.example.recommend.adapter.CountryAdapter;
 import com.example.recommend.data.SpinnerCountries;
@@ -41,7 +42,7 @@ Glide: https://github.com/bumptech/glide
 ---------------------------------------------
 API
 ---------------------------------------------
-OpenTripMap: https://opentripmap.io/product
+Piscum: https://picsum.photos/
 CountryFlags: https://flagcdn.com/
 Unsplash: https://source.unsplash.com
 */
@@ -49,7 +50,7 @@ Unsplash: https://source.unsplash.com
 public class CountryFragment extends Fragment{
 
     private static final String FirebaseURL = "https://comp90018-a2-default-rtdb.asia-southeast1.firebasedatabase.app/";
-    private static final String BackgroundURL = "https://source.unsplash.com/1600x900/?";
+    private static final String BackgroundURL = "https://picsum.photos/800/500";
     private CountryFragmentBinding binding;
     private String country;
 
@@ -102,10 +103,10 @@ public class CountryFragment extends Fragment{
 
         // initial the head image with Glide
         // this API will search for a random related image of this country
-        String img_url = BackgroundURL + country;
+        String img_url = BackgroundURL;
         Glide.with(this)
                 .load(img_url)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .signature(new ObjectKey(System.currentTimeMillis()))
                 .into(image_country);
     }
 
