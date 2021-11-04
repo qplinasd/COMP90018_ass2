@@ -9,8 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#CD284747">
+        android:layout_height="60dp"
+        android:background="#1B3232">
 
         <ImageView
             android:id="@+id/btn_post"
@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:src="@drawable/camera"
-            app:tint="@color/text_grey" />
+            app:tint="@color/cream" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:layout_marginLeft="13dp"
                 android:layout_marginRight="13dp"
                 android:text="Travel Diary"
-                android:textColor="@color/text_grey"
+                android:textColor="@color/cream"
                 android:textSize="20sp" />
         </LinearLayout>
 

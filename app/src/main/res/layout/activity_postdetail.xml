@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@color/text_grey">
+        android:background="@color/text_gray_1">
         <ImageButton
             android:id="@+id/button_return_sharelist"
             android:layout_width="wrap_content"

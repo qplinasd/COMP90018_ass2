@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="@color/text_grey"
+        app:cardBackgroundColor="@color/cream"
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="12dp">
 
@@ -49,7 +49,7 @@
         android:layout_height="50dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="@color/text_grey"
+        app:cardBackgroundColor="@color/cream"
         app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
