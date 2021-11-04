@@ -4,10 +4,12 @@ package com.example.recommend;
  * * stuId:1019019
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,10 +28,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisteredActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, ChildEventListener {
+public class RegisteredActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, ValueEventListener{
 
     private static final String FirebaseURL = "https://comp90018-a2-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
@@ -46,7 +50,7 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
     private TextView tv_inconsistent;
     private TextView tv_wrong_name;
     private TextView tv_wrong_pass;
-
+    private Boolean isExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,11 +94,12 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
                         .getReference("users");
 
                 String name = et_user.getText().toString().trim();
-                databaseReference.orderByChild("username").equalTo(name).addChildEventListener(this);
+                databaseReference.orderByChild("username").equalTo(name).addListenerForSingleValueEvent(this);
 
                 break;
             case R.id.btn_login:
                 startActivity(new Intent(this, LoginActivity.class));
+                break;
         }
     }
 
@@ -153,24 +158,24 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        //get input value
-        String name = et_user.getText().toString().trim();
-        String desc = et_desc.getText().toString().trim();
-        String pass = et_pass.getText().toString().trim();
-        String email = et_email.getText().toString().trim();
+        if(snapshot.exists()){
+            new AlertDialog.Builder(this).setMessage("User already exists")
+                    .setPositiveButton("confirm", null)
+                    .show();
+        }
+        else{
+            //get input value
+            String name = et_user.getText().toString().trim();
+            String desc = et_desc.getText().toString().trim();
+            String pass = et_pass.getText().toString().trim();
+            String email = et_email.getText().toString().trim();
 
-        if (tv_inconsistent.getVisibility() == View.INVISIBLE &&
-                tv_wrong_name.getVisibility() == View.INVISIBLE &&
-                tv_wrong_pass.getVisibility() == View.INVISIBLE){
+            if (tv_inconsistent.getVisibility() == View.INVISIBLE &&
+                    tv_wrong_name.getVisibility() == View.INVISIBLE &&
+                    tv_wrong_pass.getVisibility() == View.INVISIBLE){
 
-            if(snapshot.exists()){
-                new AlertDialog.Builder(this).setMessage("User already exists")
-                        .setPositiveButton("confirm", null)
-                        .show();
-            }
-            else{
                 DatabaseReference databaseReference = FirebaseDatabase
                         .getInstance(FirebaseURL)
                         .getReference("users");
@@ -183,28 +188,24 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
 
                 databaseReference.updateChildren(childUpdates);
 
-                startActivity(new Intent(this, LoginActivity.class));
+                new AlertDialog.Builder(this).setMessage("Register successfully")
+                        .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                jumpToLogin();
+                            }
+                        }).show();
+
             }
         }
     }
 
     @Override
-    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-    }
-
-    @Override
-    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-    }
-
-    @Override
-    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-    }
-
-    @Override
     public void onCancelled(@NonNull DatabaseError error) {
 
+    }
+
+    private void jumpToLogin(){
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
