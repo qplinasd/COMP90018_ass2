@@ -15,6 +15,7 @@ import com.example.recommend.data.FavouritePost;
 import com.example.recommend.data.Post;
 import com.example.recommend.databinding.ActivityFavouriteBinding;
 import com.example.recommend.databinding.ActivitySharelistBinding;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,7 +54,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
         getPostInfo();
     }
 
-    public void getPostInfo(){
+    public void getPostInfo() {
         app = (MyApplication) getApplication();
 
         DatabaseReference postData = FirebaseDatabase
@@ -95,8 +96,44 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
         adapter.setOnItemDeleteClickListener(new PostAdapter.onItemDeleteListener() {
             @Override
             public void onDeleteClick(int position) {
+                Toast.makeText(FavouriteActivity.this,
+                        "delete:" + postsList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                DatabaseReference postData = FirebaseDatabase
+                        .getInstance(FirebaseURL)
+                        .getReference("userFavourite");
                 postsList.remove(position);
-                Toast.makeText(FavouriteActivity.this, "delete item:" + position, Toast.LENGTH_SHORT).show();
+                postData.orderByChild("username").equalTo(app.getUsername())
+                        .addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                                FavouritePost favouritePost = snapshot.getValue(FavouritePost.class);
+                                if (favouritePost.getPostKey().equals(mList.get(position).getPostKey())){
+                                    snapshot.getRef().removeValue();
+                                }
+                            }
+
+                            @Override
+                            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
                 adapter.notifyDataSetChanged();
             }
         });
@@ -110,7 +147,7 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
 
         DatabaseReference postData = FirebaseDatabase
                 .getInstance(FirebaseURL)
-                .getReference("posts/"+favouritePost.getPostKey());
+                .getReference("posts/" + favouritePost.getPostKey());
 
         postData.addValueEventListener(this);
 
@@ -132,6 +169,11 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
     }
 
     @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+
+    @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
         Post post = snapshot.getValue(Post.class);
 
@@ -140,8 +182,4 @@ public class FavouriteActivity extends AppCompatActivity implements ChildEventLi
         mListView.setAdapter(adapter);
     }
 
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
-        Log.w("TAG", "loadPost:onCancelled", error.toException());
-    }
 }
